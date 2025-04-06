@@ -7,8 +7,6 @@ DROP TABLE IF EXISTS employee;
 CREATE TABLE employee(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	id_superieur INT,
-	username VARCHAR(20) NOT NULL,
-	mdp VARCHAR(60) NOT NULL,
 	prenom VARCHAR(30) NOT NULL,
 	nom VARCHAR(30) NOT NULL,
 	courriel VARCHAR(50),
@@ -23,7 +21,16 @@ CREATE TABLE employee(
 	date_embauche DATE NOT NULL,
 	departement VARCHAR(30),
 	poste VARCHAR(30) NOT NULL,
-	salaire FLOAT NOT NULL
+	salaire FLOAT NOT NULL,
+	est_actif BOOL NOT NULL
+);
+
+DROP TABLE IF EXISTS employee_credentials;
+CREATE TABLE employee_credentials(
+	id_employee INT NOT NULL,
+	username VARCHAR(20) NOT NULL,
+	mdp VARCHAR(60) NOT NULL,
+	`role` VARCHAR(20) NOT NULL
 );
 
 DROP TABLE IF EXISTS cedule_quart;
