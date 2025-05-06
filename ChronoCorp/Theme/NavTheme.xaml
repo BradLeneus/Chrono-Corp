@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--       C O L O R  V A R I A B L E S       -->
+    <SolidColorBrush x:Key="ExtraLightBlueColor" Color="#F5F7F8" />
+    <SolidColorBrush x:Key="LightBlueColor" Color="#B5C1CD" />
+    <SolidColorBrush x:Key="PastelBlueColor" Color="#CBD3DB" />
+    <SolidColorBrush x:Key="BlueColor" Color="#517597" />
+    <SolidColorBrush x:Key="MarineBlueColor" Color="#0D3151" />
+    <SolidColorBrush x:Key="PrimaryTextColor" Color="#02050E" />
+
+
+    <!--       N A V  B U T T O N S       -->
+    <Style x:Key="NavButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource MarineBlueColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource ExtraLightBlueColor}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Padding" Value="20 10 10 10" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ExtraLightBlueColor}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center"
+                                  Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource LightBlueColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource LightBlueColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--       L I S T B O X  C A N C E L  S T Y L E       -->
+    <Style x:Key="NavListBoxStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

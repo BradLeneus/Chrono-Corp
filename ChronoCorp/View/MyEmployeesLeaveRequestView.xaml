@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="ChronoCorp.View.MyEmployeesLeaveRequestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChronoCorp.View"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border Style="{StaticResource ViewBorderStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Demandes de congés de mes employés</TextBlock>
+            <StackPanel Grid.Row="1">
+                <DataGrid AutoGenerateColumns="False"
+                        ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                        CellStyle="{StaticResource DataGridCellStyle}"
+                        BorderBrush="{StaticResource LightBlueColor}"
+                        RowStyle="{StaticResource DataGridRowStyle}"
+                        GridLinesVisibility="None"
+                        IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employé" Width="*"/>
+                        <DataGridTextColumn Header="Date début" Width="*"/>
+                        <DataGridTextColumn Header="Date fin" Width="*"/>
+                        <DataGridTextColumn Header="Type de congé" Width="*"/>
+                        <DataGridTextColumn Header="Date de la demande" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="20 0 0 0">
+                <Border Style="{StaticResource BackgroundFormStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CurrentViewTitleStyle}" HorizontalAlignment="Center">Demande de {employé}</TextBlock>
+                        <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                            <Label Style="{StaticResource LabelStyle}">Type de la demande</Label>
+                            <TextBox Style="{StaticResource FormInputStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
+                                <Label Style="{StaticResource LabelStyle}">Du</Label>
+                                <DatePicker x:Name="dateDebut" Width="auto"/>
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
+                                <Label Style="{StaticResource LabelStyle}">Au</Label>
+                                <DatePicker x:Name="dateFin" Width="auto"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                            <Label Style="{StaticResource LabelStyle}">Commentaire de l'employé</Label>
+                            <TextBox Style="{StaticResource FormInputStyle}"
+                                    AcceptsReturn="True"
+                                    IsReadOnly="True"
+                                    Width="auto"
+                                    Height="100"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Content="Accepté" GroupName="Approbation" />
+                            <RadioButton Content="Refusé" GroupName="Approbation" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                            <Label Style="{StaticResource LabelStyle}">Commentaire</Label>
+                            <TextBox Style="{StaticResource FormInputStyle}"
+                                    AcceptsReturn="True"
+                                    Width="auto"
+                                    Height="100"/>
+                        </StackPanel>
+                        <Button Style="{StaticResource DarkBlueButtonStyle}">Envoyer la réponse</Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

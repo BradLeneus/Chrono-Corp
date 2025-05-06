@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="ChronoCorp.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChronoCorp.View" xmlns:viewmodel="clr-namespace:ChronoCorp.ViewModel"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <Border Style="{StaticResource ViewBorderStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock  Style="{StaticResource CurrentViewTitleStyle}">
+                <Run Text="Bonjour" />
+                <Run Text="{Binding Prenom}" />
+            </TextBlock>
+            <TextBlock Grid.Row="1">Vous avez {nbr} notifications non lues</TextBlock>
+
+            <StackPanel Grid.Row="2" Visibility="{Binding SectionsForEmployeesVisibility}">
+                <DataGrid AutoGenerateColumns="False"
+                          HeadersVisibility="None"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding MessagesPaie}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Message" Width="*" Binding="{Binding Contenu}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Temps}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Style="{StaticResource DarkBlueButtonStyle}" Command="{Binding NavigateToMyPaySlipsCommand}">Voir mes fiches de paie</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Visibility="{Binding SectionForManagerVisibility}">
+                <DataGrid AutoGenerateColumns="False"
+                          HeadersVisibility="None"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding MessagesDemandesConge}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Message" Width="*" Binding="{Binding Contenu}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Temps}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Style="{StaticResource DarkBlueButtonStyle}" Command="{Binding NavigateToMyEmployeesLeaveRequestCommand}">Voir les demandes de congé</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Visibility="{Binding SectionsForEmployeesVisibility}">
+                <DataGrid AutoGenerateColumns="False"
+                          HeadersVisibility="None"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding MessagesApprobationConge}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Message" Width="*" Binding="{Binding Contenu}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Temps}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Style="{StaticResource DarkBlueButtonStyle}" Command="{Binding NavigateToMyLeaveRequestCommand}">Mes demandes de congé</Button>
+            </StackPanel>
+            
+            <ListBox ItemsSource="{Binding SubMenuItems}"
+                    Grid.Column="2" Grid.Row="2"
+                    BorderThickness="0"
+                    Width="auto"
+                    Background="Transparent"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    ItemContainerStyle="{StaticResource NavListBoxStyle}"
+                    Padding="20 0 0 0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding Command}" Style="{StaticResource LightBlueButtonStyle}" HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center"/>
+                        </Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Border>
+
+</UserControl>

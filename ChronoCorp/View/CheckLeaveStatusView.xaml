@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ChronoCorp.View.CheckLeaveStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChronoCorp.View"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border Style="{StaticResource BackgroundFormStyle}">
+        <StackPanel>
+            <TextBlock Style="{StaticResource CurrentViewTitleStyle}" HorizontalAlignment="Center">Ma demande du {date}</TextBlock>
+            <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                <Label Style="{StaticResource LabelStyle}">Type de la demande</Label>
+                <TextBox Style="{StaticResource FormInputStyle}" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
+                    <Label Style="{StaticResource LabelStyle}">Du</Label>
+                    <TextBox Style="{StaticResource FormInputStyle}" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
+                    <Label Style="{StaticResource LabelStyle}">Au</Label>
+                    <TextBox Style="{StaticResource FormInputStyle}" IsReadOnly="True"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                <Label Style="{StaticResource LabelStyle}">Commentaire</Label>
+                <TextBox Style="{StaticResource FormInputStyle}"
+                    AcceptsReturn="True"
+                    IsReadOnly="True"
+                    Width="auto"
+                    Height="100"/>
+            </StackPanel>
+            <TextBlock>{status}</TextBlock>
+            <StackPanel Style="{StaticResource StackPanelFormStyle}">
+                <Label Style="{StaticResource LabelStyle}">Commentaire du gestionnaire</Label>
+                <TextBox Style="{StaticResource FormInputStyle}"
+                    AcceptsReturn="True"
+                    IsReadOnly="True"
+                    Width="auto"
+                    Height="100"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
