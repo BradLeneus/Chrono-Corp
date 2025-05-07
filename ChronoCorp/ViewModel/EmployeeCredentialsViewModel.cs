@@ -11,9 +11,6 @@ namespace ChronoCorp.ViewModel
         private long _id;
 
         [ObservableProperty]
-        private long _idEmployee;
-
-        [ObservableProperty]
         private string _mdp;
 
         [ObservableProperty]
@@ -23,7 +20,6 @@ namespace ChronoCorp.ViewModel
         {
             _model = model;
             _id = model.Id;
-            _idEmployee = model.IdEmployee;
             _mdp = model.Mdp;
             _role = model.Role;
         }

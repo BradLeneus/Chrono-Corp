@@ -30,16 +30,16 @@ namespace ChronoCorp
             _employeeService = new EmployeeService(dataProvider);
 
             // user pour test
-            var emp = new EmployeeCredentials { IdEmployee = 432401, Role = "Employé" };
-            var rh = new EmployeeCredentials { IdEmployee = 438412, Role = "Ressources humaines" };
-            var gest = new EmployeeCredentials { IdEmployee = 330152, Role = "Gestionnaire" };
+            var emp = new EmployeeCredentials { Id = 432401, Mdp="abc123", Role = "Employé" };
+            var rh = new EmployeeCredentials { Id = 438412, Mdp="abc123", Role = "Ressources humaines" };
+            var gest = new EmployeeCredentials { Id = 330152, Mdp="abc123", Role = "Gestionnaire" };
 
             LoadEmployee(emp);
         }
 
         public async void LoadEmployee(EmployeeCredentials credentials)
         {
-            var employee = await _employeeService.GetEmployeeByIdAsync(credentials.IdEmployee);
+            var employee = await _employeeService.GetEmployeeByIdAsync(credentials.Id);
 
             if (employee == null)
             {

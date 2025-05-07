@@ -8,7 +8,7 @@ namespace ChronoCorp.ViewModel
         private readonly TypeQuart _model;
 
         [ObservableProperty]
-        private long _id;
+        private int _id;
 
         [ObservableProperty]
         private string _nom;

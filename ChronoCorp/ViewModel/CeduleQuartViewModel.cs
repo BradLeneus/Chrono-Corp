@@ -22,7 +22,7 @@ namespace ChronoCorp.ViewModel
         public long _idCreateur;
 
         [ObservableProperty]
-        public long _typeQuart;
+        public int _typeQuart;
 
         [ObservableProperty]
         public DateTime _heureDebut;

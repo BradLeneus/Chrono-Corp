@@ -19,9 +19,6 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private DateTime _heureFin;
 
-        [ObservableProperty]
-        private bool _isPause;
-
         public CedulePointageViewModel(CedulePointage model)
         {
             _model = model;
@@ -29,7 +26,6 @@ namespace ChronoCorp.ViewModel
             _idEmployee = model.IdEmployee;
             _heureDebut = model.HeureDebut;
             _heureFin = model.HeureFin;
-            _isPause = model.IsPause;
         }
     }
 }

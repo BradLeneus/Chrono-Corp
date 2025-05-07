@@ -9,7 +9,7 @@ public partial class EmployeeViewModel : BaseViewModel
     private long _id;
 
     [ObservableProperty]
-    private int? _idSuperieur;
+    private long? _idSuperieur;
 
     [ObservableProperty]
     private string _prenom;
@@ -18,7 +18,7 @@ public partial class EmployeeViewModel : BaseViewModel
     private string _nom;
 
     [ObservableProperty]
-    private string? _courriel;
+    private string _courriel;
 
     [ObservableProperty]
     private string? _adresseLigne1;
@@ -33,7 +33,7 @@ public partial class EmployeeViewModel : BaseViewModel
     private string? _codePostal;
 
     [ObservableProperty]
-    private string? _telephone;
+    private string _telephone;
 
     [ObservableProperty]
     private DateTime _dateNaissance;
@@ -48,7 +48,7 @@ public partial class EmployeeViewModel : BaseViewModel
     private DateTime _dateEmbauche;
 
     [ObservableProperty]
-    private string? _departement;
+    private string _departement;
 
     [ObservableProperty]
     private string _poste;
