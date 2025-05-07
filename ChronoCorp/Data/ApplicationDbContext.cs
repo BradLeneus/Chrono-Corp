@@ -13,7 +13,6 @@ namespace ChronoCorp.Data
         public DbSet<EmployeeCredentials> Employee_Credentials { get; set; }
         public DbSet<TypeQuart> Type_Quart { get; set; }
         public DbSet<CeduleQuart> Cedule_Quart { get; set; }
-        public DbSet<CedulePointage> Cedule_Pointage { get; set; }
         public DbSet<DemandeConge> Demande_Conge { get; set; }
         public DbSet<Messagerie> Messagerie { get; set; }
         public DbSet<FichePaie> Fiche_Paie { get; set; }

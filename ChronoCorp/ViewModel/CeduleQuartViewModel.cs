@@ -30,6 +30,18 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         public DateTime _heureFin;
 
+        [ObservableProperty]
+        public DateTime? _heureEntree;
+
+        [ObservableProperty]
+        public DateTime? _heureDepart;
+
+        [ObservableProperty]
+        public bool _isPausePayee;
+
+        [ObservableProperty]
+        public bool _isPointageApprouve;
+
         public CeduleQuartViewModel(CeduleQuart model)
         {
             _model = model;
@@ -38,6 +50,10 @@ namespace ChronoCorp.ViewModel
             _typeQuart = model.TypeQuart;
             _heureDebut = model.HeureDebut;
             _heureFin = model.HeureFin;
+            _heureEntree = model.HeureEntree;
+            _heureDepart = model.HeureDepart;
+            _isPausePayee = model.IsPausePayee;
+            _isPointageApprouve = model.IsPointageApprouve;
         }
     }
 }
