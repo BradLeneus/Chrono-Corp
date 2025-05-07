@@ -1,4 +1,5 @@
 ﻿using ChronoCorp.Data;
+using ChronoCorp.Interface;
 using ChronoCorp.Model;
 using ChronoCorp.Service;
 using ChronoCorp.View;

@@ -1,14 +1,14 @@
-﻿using ChronoCorp.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ChronoCorp.Interface
 {
-    public interface IEmployeeService
+    public interface IMainViewModel
     {
-        Task<Employee> GetEmployeeByIdAsync(long userId);
+        ICommand SaveCommand { get; }
     }
 }

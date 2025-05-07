@@ -1,4 +1,4 @@
-﻿namespace ChronoCorp.Service
+﻿namespace ChronoCorp.Interface
 {
     public interface INavigationService
     {

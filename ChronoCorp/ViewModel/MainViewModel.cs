@@ -1,13 +1,14 @@
-﻿using ChronoCorp.Model;
-using ChronoCorp.Service;
+﻿using ChronoCorp.Interface;
+using ChronoCorp.Model;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace ChronoCorp.ViewModel
 {
-    public partial class MainViewModel : ObservableObject, INavigationService
+    public partial class MainViewModel : ObservableObject, INavigationService, IMainViewModel
     {
         [ObservableProperty]
         private ObservableCollection<MenuItemModel> menuItems;
@@ -15,22 +16,24 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private object currentView;
 
-        private readonly EmployeeCredentials credentials;
-
         [ObservableProperty]
-        private Employee employee;
+        private Employee currentEmployee;
 
-        // A RETIRER QUAND APRES AVOIR AJUSTE VIEWMODELS
-        public User currentUser = null;
+        private readonly String _role;
 
-        public MainViewModel(EmployeeCredentials empCreds, Employee employee)
+        private readonly IEmployeeService _employeeService;
+
+        public ICommand SaveCommand => throw new NotImplementedException();
+
+        public MainViewModel(String role, Employee employee, IEmployeeService employeeService)
         {
-            credentials = empCreds;
-            Employee = employee;
+            _role = role;
+            CurrentEmployee = employee;
+            _employeeService = employeeService;
             LoadMenuItems();
             CurrentView = new HomeView
             {
-                DataContext = new HomeViewModel(Employee, credentials.Role, this)
+                DataContext = new HomeViewModel(CurrentEmployee, _role, this)
             };
         }
 
@@ -46,7 +49,7 @@ namespace ChronoCorp.ViewModel
             MenuItems.Add(new MenuItemModel { Title = "Home", Command = OpenHomeCommand });
 
 
-            if (credentials.Role != "Gestionnaire")
+            if (_role != "Gestionnaire")
             {
                 MenuItems.Add(new MenuItemModel { Title = "Mon horaire", Command = null });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mon horaire", Command = OpenScheduleCommand });
@@ -54,7 +57,7 @@ namespace ChronoCorp.ViewModel
                 MenuItems.Add(new MenuItemModel { Title = "Poser une demande congé", Command = OpenMyLeaveRequestCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mes fiches de paie", Command = OpenPaySlipsCommand });
 
-                if (credentials.Role == "Ressources humaines")
+                if (_role == "Ressources humaines")
                 {
                     MenuItems.Add(new MenuItemModel { Title = "Employés", Command = null });
                     MenuItems.Add(new MenuItemModel { Title = "Voir la liste des employés", Command = OpenEmployeeListCommand });
@@ -79,7 +82,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new HomeView
             {
-                DataContext = new HomeViewModel(employee, credentials.Role, this)
+                DataContext = new HomeViewModel(CurrentEmployee, _role, this)
             });
         }
 
@@ -142,7 +145,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new MyEmployeesView
             {
-                DataContext = new MyEmployeesViewModel(Employee)
+                DataContext = new MyEmployeesViewModel(CurrentEmployee)
             });
         }
         
@@ -152,7 +155,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new MyLeaveRequestView
             {
-                DataContext = new MyLeaveRequestViewModel(currentUser)
+                //DataContext = new MyLeaveRequestViewModel(currentUser)
             });
         }
         

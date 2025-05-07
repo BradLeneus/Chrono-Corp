@@ -17,6 +17,10 @@ namespace ChronoCorp.Data
         public DbSet<Messagerie> Messagerie { get; set; }
         public DbSet<FichePaie> Fiche_Paie { get; set; }
 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+        {}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "server=localhost;user=root;password=;database=chronocorp;";

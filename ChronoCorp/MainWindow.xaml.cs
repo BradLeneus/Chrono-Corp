@@ -1,7 +1,9 @@
 ﻿using ChronoCorp.Data;
+using ChronoCorp.Interface;
 using ChronoCorp.Model;
 using ChronoCorp.Service;
 using ChronoCorp.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,34 +22,28 @@ namespace ChronoCorp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly EmployeeService _employeeService;
+        private readonly IEmployeeService _employeeService;
 
-        public MainWindow()
+        public MainWindow(String role, Employee employee, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
-            var dataProvider = new EmployeeDataProvider();
-            _employeeService = new EmployeeService(dataProvider);
+            _employeeService = serviceProvider.GetRequiredService<IEmployeeService>();
 
-            // user pour test
-            var emp = new EmployeeCredentials { Id = 432401, Mdp="abc123", Role = "Employé" };
-            var rh = new EmployeeCredentials { Id = 438412, Mdp="abc123", Role = "Ressources humaines" };
-            var gest = new EmployeeCredentials { Id = 330152, Mdp="abc123", Role = "Gestionnaire" };
-
-            LoadEmployee(emp);
+            DataContext = new MainViewModel(role, employee, _employeeService);
         }
 
-        public async void LoadEmployee(EmployeeCredentials credentials)
-        {
-            var employee = await _employeeService.GetEmployeeByIdAsync(credentials.Id);
+        //public async void LoadEmployee(EmployeeCredentials credentials)
+        //{
+        //    var employee = await _employeeService.GetEmployeeByIdAsync(credentials.Id);
 
-            if (employee == null)
-            {
-                MessageBox.Show("Employé non trouvé !");
-                return;
-            }
+        //    if (employee == null)
+        //    {
+        //        MessageBox.Show("Employé non trouvé !");
+        //        return;
+        //    }
 
-            DataContext = new MainViewModel(credentials, employee);
-        }
+        //    DataContext = new MainViewModel(credentials.Role, employee, _employeeService);
+        //}
     }
 }

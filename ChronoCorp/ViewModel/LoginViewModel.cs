@@ -1,14 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ChronoCorp.Services;
 using System.Threading.Tasks;
 using System.Windows;
+using ChronoCorp.Model;
+using ChronoCorp.Service;
+using ChronoCorp.Interface;
 
 namespace ChronoCorp.ViewModel
 {
     public partial class LoginViewModel : ObservableObject
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
+
+        private readonly IEmployeeService _employeeService;
+
+        private readonly IServiceProvider _serviceProvider;
 
         [ObservableProperty]
         private string username;
@@ -19,9 +25,11 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private string loginMessage;
 
-        public LoginViewModel()
+        public LoginViewModel(IAuthService authService, IEmployeeService employeeService, IServiceProvider serviceProvider)
         {
-            _authService = new AuthService();
+            _authService = authService;
+            _employeeService = employeeService;
+            _serviceProvider = serviceProvider;
         }
 
         [RelayCommand]
@@ -34,12 +42,16 @@ namespace ChronoCorp.ViewModel
             }
 
             bool isValid = await _authService.AuthenticateAsync(Username, Password);
+            long userId = await _authService.GetEmployeeIdAsync(Username, Password);
+            string role = await _authService.GetEmployeeRoleAsync(Username, Password);
 
             if (isValid)
             {
+                Employee employee = await _employeeService.GetEmployeeByIdAsync(userId);
+
                 LoginMessage = "Connexion réussie";
 
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(role, employee, _serviceProvider);
                 mainWindow.Show();
 
                 Application.Current.Windows[0]?.Close();

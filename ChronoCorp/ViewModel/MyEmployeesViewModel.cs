@@ -20,15 +20,15 @@ namespace ChronoCorp.ViewModel
         public MyEmployeesViewModel(Employee employee)
         {
             var dataProvider = new EmployeeDataProvider();
-            _employeeService = new EmployeeService(dataProvider);
+            //_employeeService = new EmployeeService(dataProvider);
             Employee = employee;
-            _ = LoadMyEmployees();
+            //_ = LoadMyEmployees();
         }
 
-        public async Task LoadMyEmployees()
-        {
-            var myEmployeesList = await _employeeService.GetEmployeeListByIdSuperiorAsync(Employee.Id);
-            MyEmployees = new ObservableCollection<Employee>(myEmployeesList);
-        }
+        //public async Task LoadMyEmployees()
+        //{
+        //    var myEmployeesList = await _employeeService.GetEmployeeListByIdSuperiorAsync(Employee.Id);
+        //    MyEmployees = new ObservableCollection<Employee>(myEmployeesList);
+        //}
     }
 }

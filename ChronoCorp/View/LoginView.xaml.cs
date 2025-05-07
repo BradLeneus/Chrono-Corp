@@ -7,11 +7,11 @@ namespace ChronoCorp.View
     {
         private readonly LoginViewModel _viewModel;
 
-        public LoginView()
+        public LoginView(LoginViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new LoginViewModel();
-            this.DataContext = _viewModel;
+            _viewModel = viewModel;
+            DataContext = _viewModel;
         }
 
         private async void OnLoginClick(object sender, RoutedEventArgs e)
@@ -22,8 +22,6 @@ namespace ChronoCorp.View
             if (_viewModel.LoginMessage == "Connexion réussie")
             {
                 this.Close();
-
-                var mainWindow = new MainWindow();
             }
         }
 
