@@ -50,7 +50,7 @@ namespace ChronoCorp.ViewModel
             CurrentView = new HomeView
             {
                 DataContext = new 
-                HomeViewModel(CurrentEmployee, _role, this, _messagerieService)
+                HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService)
             };
         }
 
@@ -99,7 +99,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new HomeView
             {
-                DataContext = new HomeViewModel(CurrentEmployee, _role, this, _messagerieService)
+                DataContext = new HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService)
             });
         }
 
@@ -182,7 +182,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new PaySlipsView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new PaySlipsViewModel(CurrentEmployee, _fichePaieService)
             });
         }
         

@@ -13,6 +13,9 @@ namespace ChronoCorp.ViewModel
     public partial class HomeViewModel : ObservableObject
     {
         [ObservableProperty]
+        private Employee employee;
+
+        [ObservableProperty]
         private string prenom;
 
         [ObservableProperty]
@@ -43,12 +46,16 @@ namespace ChronoCorp.ViewModel
 
         private IMessagerieService _messagerieService;
 
-        public HomeViewModel(Employee employee, string role, INavigationService navigationService, IMessagerieService messagerieService)
+        private IFichePaieService _fichePaieService;
+
+        public HomeViewModel(Employee employee, string role, INavigationService navigationService, IMessagerieService messagerieService, IFichePaieService fichePaieService)
         {
             Prenom = employee.Prenom;
             Role = role;
+            Employee = employee;
             _navigationService = navigationService;
             _messagerieService = messagerieService;
+            _fichePaieService = fichePaieService;
 
             LoadSubMenuItemModels();
             LoadNbrMessages(employee);
@@ -107,7 +114,7 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new PaySlipsView
             {
-                DataContext = new PaySlipsViewModel(null)
+                DataContext = new PaySlipsViewModel(Employee, _fichePaieService)
             });
         }
 

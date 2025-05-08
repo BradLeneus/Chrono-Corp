@@ -3,12 +3,8 @@ using ChronoCorp.Interface;
 using ChronoCorp.Service;
 using ChronoCorp.View;
 using ChronoCorp.ViewModel;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace ChronoCorp
@@ -42,11 +38,8 @@ namespace ChronoCorp
             // Logging
             services.AddLogging();
 
-            //var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            //optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 31)));
-
+            // DbContext
             services.AddSingleton(new ApplicationDbContext());
-
 
             // Services
             services.AddTransient<IMessagerieService, MessagerieService>();

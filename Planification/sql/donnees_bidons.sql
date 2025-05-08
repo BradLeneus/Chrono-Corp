@@ -85,8 +85,16 @@ INSERT INTO demande_conge (Id, IdEmetteur, IdDestinataire, TempsSoumission, Date
 INSERT INTO messagerie (Id, IdEmetteur, IdDestinataire, TypeMessage, Contenu, Temps) VALUES
 (1, 432401, 330152, 'demande_conge', 'Vous avez reçu une demande de congé', '2025-05-01'),
 (2, 330152, 432401, 'approbation_conge', 'Votre demande de congé à été approuvée', '2025-05-02'),
-(3, 330152, 432401, 'paie', 'Vous avez reçu une nouvelle fiche de paie', '2025-05-01');
-
+(3, 330152, 432401, 'paie', 'Vous avez reçu une nouvelle fiche de paie', '2025-05-01'),
+(4, 433753, 330152, 'demande_conge', 'Vous avez reçu une demande de congé', '2025-05-03'),
+(5, 330152, 433753, 'approbation_conge', 'Votre demande de congé à été approuvée', '2025-05-04'),
+(6, 330152, 433753, 'paie', 'Vous avez reçu une nouvelle fiche de paie', '2025-05-03'),
+(7, 434212, 330152, 'demande_conge', 'Vous avez reçu une demande de congé', '2025-05-05'),
+(8, 330152, 434212, 'approbation_conge', 'Votre demande de congé à été approuvée', '2025-05-06'),
+(9, 330152, 434212, 'paie', 'Vous avez reçu une nouvelle fiche de paie', '2025-05-05'),
+(10, 435377, 330152, 'demande_conge', 'Vous avez reçu une demande de congé', '2025-05-07'),
+(11, 330152, 435377, 'approbation_conge', 'Votre demande de congé à été approuvée', '2025-05-08'),
+(12, 330152, 435377, 'paie', 'Vous avez reçu une nouvelle fiche de paie', '2025-05-07');
 
 # fiche_paie
 INSERT INTO fiche_paie (Id, IdEmployee, DateDebut, DateFin, Montant, NbrHeure, VacanceCumul, DatePaie) VALUES

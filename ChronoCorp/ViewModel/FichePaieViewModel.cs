@@ -1,47 +1,31 @@
-﻿using ChronoCorp.Model;
+﻿using ChronoCorp.Interface;
+using ChronoCorp.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ChronoCorp.ViewModel
 {
-    public partial class FichePaieViewModel : BaseViewModel
+    public partial class FichePaieViewModel : ObservableObject
     {
-        private readonly FichePaie _model;
+        private readonly IFichePaieService _fichePaieService;
 
         [ObservableProperty]
-        private long _id;
+        private Employee employee;
 
         [ObservableProperty]
-        private long _idEmployee;
+        public ObservableCollection<FichePaie> fichePaies = new();
 
-        [ObservableProperty]
-        private DateTime _dateDebut;
-
-        [ObservableProperty]
-        private DateTime _dateFin;
-
-        [ObservableProperty]
-        private float _montant;
-
-        [ObservableProperty]
-        private float _nbrHeure;
-
-        [ObservableProperty]
-        private float _vacanceCumul;
-
-        [ObservableProperty]
-        private DateTime _datePaie;
-
-        public FichePaieViewModel(FichePaie model)
+        public FichePaieViewModel(Employee employee, IFichePaieService fichePaieService)
         {
-            _model = model;
-            _id = model.Id;
-            _idEmployee = model.IdEmployee;
-            _dateDebut = model.DateDebut;
-            _dateFin = model.DateFin;
-            _montant = model.Montant;
-            _nbrHeure = model.NbrHeure;
-            _vacanceCumul = model.VacanceCumul;
-            _datePaie = model.DatePaie;
+            Employee = employee;
+            _fichePaieService = fichePaieService;
+            _ = LoadMyFichePaie(employee);
+        }
+
+        private async Task LoadMyFichePaie(Employee employee)
+        {
+            var fichePaieList = await _fichePaieService.GetFichePaieListByEmployeeId(employee.Id);
+            FichePaies = new ObservableCollection<FichePaie>(fichePaieList);
         }
     }
 }

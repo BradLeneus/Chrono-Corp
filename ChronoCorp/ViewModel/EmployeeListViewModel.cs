@@ -15,6 +15,7 @@ public partial class EmployeeListViewModel : ObservableObject
 
     public EmployeeListViewModel(Employee employee, IEmployeeService employeeService)
     {
+        Employee = employee;
         _employeeService = employeeService;
         _ = LoadAllEmployees();
     }

@@ -20,18 +20,18 @@
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Mes fiches de paies</TextBlock>
             <StackPanel Grid.Row="1">
                 <DataGrid AutoGenerateColumns="False"
-                ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                CellStyle="{StaticResource DataGridCellStyle}"
-                BorderBrush="{StaticResource LightBlueColor}"
-                RowStyle="{StaticResource DataGridRowStyle}"
-                GridLinesVisibility="None"
-                IsReadOnly="True">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding PaySlipsList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Employé" Width="*"/>
-                        <DataGridTextColumn Header="Date début" Width="*"/>
-                        <DataGridTextColumn Header="Date fin" Width="*"/>
-                        <DataGridTextColumn Header="Type de congé" Width="*"/>
-                        <DataGridTextColumn Header="Date de la demande" Width="*"/>
+                        <DataGridTextColumn Header="Numéro de la paie" Width="*" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Date début" Width="*" Binding="{Binding DateDebut}"/>
+                        <DataGridTextColumn Header="Date fin" Width="*" Binding="{Binding DateFin}"/>
+                        <DataGridTextColumn Header="Date de la paie" Width="*" Binding="{Binding DatePaie}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

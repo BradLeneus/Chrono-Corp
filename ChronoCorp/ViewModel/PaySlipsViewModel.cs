@@ -1,14 +1,31 @@
-﻿using ChronoCorp.Model;
+﻿using ChronoCorp.Interface;
+using ChronoCorp.Model;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ChronoCorp.ViewModel
 {
-    class PaySlipsViewModel
+    public partial class PaySlipsViewModel : ObservableObject
     {
-        private readonly User _user;
+        private readonly IFichePaieService _fichePaieService;
 
-        public PaySlipsViewModel(User user)
+        [ObservableProperty]
+        private Employee employee;
+
+        [ObservableProperty]
+        public ObservableCollection<FichePaie> paySlipsList = new();
+
+        public PaySlipsViewModel(Employee employee, IFichePaieService fichePaieService)
         {
-            _user = user;
+            Employee = employee;
+            _fichePaieService = fichePaieService;
+            _ = LoadMyPaySlips(employee);
+        }
+
+        private async Task LoadMyPaySlips(Employee employee)
+        {
+            var fichePaieList = await _fichePaieService.GetFichePaieListByEmployeeId(employee.Id);
+            paySlipsList = new ObservableCollection<FichePaie>(fichePaieList);
         }
     }
 }

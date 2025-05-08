@@ -1,9 +1,5 @@
 ﻿using ChronoCorp.Model;
-using System;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChronoCorp.Data
 {
@@ -17,17 +13,12 @@ namespace ChronoCorp.Data
         public DbSet<Messagerie> Messagerie { get; set; }
         public DbSet<FichePaie> Fiche_Paie { get; set; }
 
-        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        //: base(options)
-        //{}
-
         public ApplicationDbContext()
         : base(new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseMySql("server=localhost;user=root;password=;database=chronocorp;",
                        new MySqlServerVersion(new Version(8, 0, 23)))
             .Options)
-        {
-        }
+        {}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
