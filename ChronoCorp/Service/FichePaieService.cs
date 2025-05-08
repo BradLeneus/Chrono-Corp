@@ -1,5 +1,7 @@
 ﻿using ChronoCorp.Data;
 using ChronoCorp.Interface;
+using ChronoCorp.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,11 @@ namespace ChronoCorp.Service
         public FichePaieService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<List<FichePaie>> GetFichePaieListByEmployeeId(long id)
+        {
+            return await _dbContext.Fiche_Paie.Where(fp => fp.IdEmployee == id).ToListAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChronoCorp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ChronoCorp.Interface
 {
     public interface ICeduleQuartService
     {
+        Task<List<CeduleQuart>> GetQuartListByEmployeeId(long id);
     }
 }

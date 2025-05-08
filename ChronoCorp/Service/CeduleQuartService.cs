@@ -25,17 +25,9 @@ namespace ChronoCorp.Service
         }
 
         //// ajouter date deb, date fin
-        //public async Task<List<CeduleQuart>> GetCeduleQuartListByCreatorId(long id)
-        //{
-        //    var cedules = await _provider.GetAllCeduleQuartAsync();
-        //    return cedules.Where(cedule => cedule.IdCreateur == id).ToList();
-        //}
-
-        //// ajouter date deb, date fin
-        //public async Task<List<CeduleQuart>> GetCeduleQuartListByEmployeeId(long id)
-        //{
-        //    var cedules = await _provider.GetAllCeduleQuartAsync();
-        //    return cedules.Where(cedule => cedule.IdEmployee == id).ToList();
-        //}
+        public async Task<List<CeduleQuart>> GetQuartListByEmployeeId(long id)
+        {
+            return await _dbContext.Cedule_Quart.Where(cd => cd.IdEmployee == id).ToListAsync();
+        }
     }
 }
