@@ -1,27 +1,27 @@
 ﻿using ChronoCorp.Data;
 using ChronoCorp.Interface;
 using ChronoCorp.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChronoCorp.Service
 {
     public class MessagerieService : IMessagerieService
     {
-        private readonly IMessagerieDataProvider _provider;
+        private readonly ApplicationDbContext _dbContext;
 
-        public MessagerieService(IMessagerieDataProvider provider)
+        public MessagerieService(ApplicationDbContext dbContext)
         {
-            _provider = provider;
+            _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Messagerie>> GetAllMessageAsync()
+        public async Task<List<Messagerie>> GetAllMessageAsync()
         {
-            return await _provider.GetAllMessageAsync();
+            return await _dbContext.Messagerie.ToListAsync();
         }
 
-        public async Task<List<Messagerie>?> GetMessageByTypeMessageAndEmployee(string type, long id)
+        public async Task<List<Messagerie>> GetMessageByTypeMessageAndEmployeeAsync(string type, long id)
         {
-            var messages = await _provider.GetAllMessageAsync();
-            return messages.Where(messages => messages.TypeMessage == type && messages.IdDestinataire == id).ToList();
+            return await _dbContext.Messagerie.Where(messages => messages.TypeMessage == type && messages.IdDestinataire == id).ToListAsync();
         }
     }
 }

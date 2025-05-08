@@ -38,27 +38,30 @@ namespace ChronoCorp
 
         private void ConfigureServices(IServiceCollection services, IConfigurationRoot configuration)
         {
-            // Configure Logging
+            // Logging
             services.AddLogging();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 31))));
 
-            // Register Services
+            // Services
+            services.AddTransient<IMessagerieService, MessagerieService>();
+            services.AddTransient<ICeduleQuartService, CeduleQuartService>();
+            services.AddTransient<IDemandeCongeService, DemandeCongeService>();
+            services.AddTransient<IFichePaieService, FichePaieService>();
+            services.AddTransient<ITypeQuartService, TypeQuartService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
             services.AddSingleton<IAuthService, AuthService>();
 
-            // Register ViewModels
-            //services.AddSingleton<IMainViewModel, MainViewModel>();
+            // ViewModels
             services.AddSingleton<LoginViewModel>();
 
-            // Register Views
+            // Views
             services.AddSingleton<LoginView>();
             services.AddSingleton<MainWindow>();
         }
 
         private void OnExit(object sender, ExitEventArgs e)
         {
-            // Dispose of services if needed
             if (_serviceProvider is IDisposable disposable)
             {
                 disposable.Dispose();

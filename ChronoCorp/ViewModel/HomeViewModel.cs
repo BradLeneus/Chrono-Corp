@@ -38,15 +38,14 @@ namespace ChronoCorp.ViewModel
 
         private INavigationService _navigationService;
 
-        private MessagerieService _messagerieService;
+        private IMessagerieService _messagerieService;
 
-        public HomeViewModel(Employee employee, string role, INavigationService navigationService)
+        public HomeViewModel(Employee employee, string role, INavigationService navigationService, IMessagerieService messagerieService)
         {
-            var dataProvider = new MessagerieDataProvider();
             Prenom = employee.Prenom;
             Role = role;
             _navigationService = navigationService;
-            _messagerieService = new MessagerieService(dataProvider);
+            _messagerieService = messagerieService;
 
             LoadSubMenuItemModels();
 
@@ -143,17 +142,17 @@ namespace ChronoCorp.ViewModel
 
         public async Task LoadPaySlipsMessages(Employee employee)
         {
-            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployee("paie", employee.Id);
+            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployeeAsync("paie", employee.Id);
             MessagesPaie = new ObservableCollection<Messagerie>(messages);
         }
         public async Task LoadLeaveRequestMessages(Employee employee)
         {
-            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployee("demande_conge", employee.Id);
+            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployeeAsync("demande_conge", employee.Id);
             MessagesDemandesConge = new ObservableCollection<Messagerie>(messages);
         }
         public async Task LoadLeaveApprobationMessages(Employee employee)
         {
-            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployee("approbation_conge", employee.Id);
+            var messages = await _messagerieService.GetMessageByTypeMessageAndEmployeeAsync("approbation_conge", employee.Id);
             MessagesApprobationConge = new ObservableCollection<Messagerie>(messages);
         }
     }

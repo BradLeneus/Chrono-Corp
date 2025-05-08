@@ -12,9 +12,9 @@ namespace ChronoCorp.ViewModel
     {
         private readonly IAuthService _authService;
 
-        private readonly IEmployeeService _employeeService;
-
         private readonly IServiceProvider _serviceProvider;
+
+        private readonly IEmployeeService _employeeService;
 
         [ObservableProperty]
         private string username;
@@ -25,7 +25,7 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private string loginMessage;
 
-        public LoginViewModel(IAuthService authService, IEmployeeService employeeService, IServiceProvider serviceProvider)
+        public LoginViewModel(IAuthService authService, IEmployeeService employeeService, IServiceProvider serviceProvider, IMessagerieService messagerieService, ICeduleQuartService ceduleQuartService, IDemandeCongeService demandeCongeService, IFichePaieService fichePaieService, ITypeQuartService typeQuartService)
         {
             _authService = authService;
             _employeeService = employeeService;

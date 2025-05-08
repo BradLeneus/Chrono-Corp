@@ -1,5 +1,6 @@
 ﻿using ChronoCorp.Interface;
 using ChronoCorp.Model;
+using ChronoCorp.Service;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -19,21 +20,37 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private Employee currentEmployee;
 
-        private readonly String _role;
+        private readonly string _role;
 
         private readonly IEmployeeService _employeeService;
 
+        private readonly IMessagerieService _messagerieService;
+
+        private readonly ICeduleQuartService _ceduleQuartService;
+
+        private readonly IDemandeCongeService _demandeCongeService;
+
+        private readonly IFichePaieService _fichePaieService;
+
+        private readonly ITypeQuartService _typeQuartService;
+
         public ICommand SaveCommand => throw new NotImplementedException();
 
-        public MainViewModel(String role, Employee employee, IEmployeeService employeeService)
+        public MainViewModel(string role, Employee employee, IEmployeeService employeeService, IMessagerieService messagerieService, ICeduleQuartService ceduleQuartService, IDemandeCongeService demandeCongeService, IFichePaieService fichePaieService, ITypeQuartService typeQuartService)
         {
             _role = role;
             CurrentEmployee = employee;
             _employeeService = employeeService;
+            _messagerieService = messagerieService;
+            _ceduleQuartService = ceduleQuartService;
+            _demandeCongeService = demandeCongeService;
+            _fichePaieService = fichePaieService;
+            _typeQuartService = typeQuartService;
             LoadMenuItems();
             CurrentView = new HomeView
             {
-                DataContext = new HomeViewModel(CurrentEmployee, _role, this)
+                DataContext = new 
+                HomeViewModel(CurrentEmployee, _role, this, _messagerieService)
             };
         }
 
@@ -82,7 +99,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new HomeView
             {
-                DataContext = new HomeViewModel(CurrentEmployee, _role, this)
+                DataContext = new HomeViewModel(CurrentEmployee, _role, this, _messagerieService)
             });
         }
 

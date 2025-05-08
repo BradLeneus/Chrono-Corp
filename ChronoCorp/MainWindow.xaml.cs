@@ -24,26 +24,28 @@ namespace ChronoCorp
     {
         private readonly IEmployeeService _employeeService;
 
+        private readonly IMessagerieService _messagerieService;
+
+        private readonly ICeduleQuartService _ceduleQuartService;
+
+        private readonly IDemandeCongeService _demandeCongeService;
+
+        private readonly IFichePaieService _fichePaieService;
+
+        private readonly ITypeQuartService _typeQuartService;
+
         public MainWindow(String role, Employee employee, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             _employeeService = serviceProvider.GetRequiredService<IEmployeeService>();
+            _messagerieService = serviceProvider.GetRequiredService<IMessagerieService>();
+            _ceduleQuartService = serviceProvider.GetRequiredService<ICeduleQuartService>();
+            _demandeCongeService = serviceProvider.GetRequiredService<IDemandeCongeService>();
+            _fichePaieService = serviceProvider.GetRequiredService<IFichePaieService>();
+            _typeQuartService = serviceProvider.GetRequiredService<ITypeQuartService>();
 
-            DataContext = new MainViewModel(role, employee, _employeeService);
+            DataContext = new MainViewModel(role, employee, _employeeService, _messagerieService, _ceduleQuartService, _demandeCongeService, _fichePaieService, _typeQuartService);
         }
-
-        //public async void LoadEmployee(EmployeeCredentials credentials)
-        //{
-        //    var employee = await _employeeService.GetEmployeeByIdAsync(credentials.Id);
-
-        //    if (employee == null)
-        //    {
-        //        MessageBox.Show("Employé non trouvé !");
-        //        return;
-        //    }
-
-        //    DataContext = new MainViewModel(credentials.Role, employee, _employeeService);
-        //}
     }
 }

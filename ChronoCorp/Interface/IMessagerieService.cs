@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ChronoCorp.Model;
 
 namespace ChronoCorp.Interface
 {
     public interface IMessagerieService
     {
+        Task<List<Messagerie>?> GetMessageByTypeMessageAndEmployeeAsync(string type, long id);
     }
 }

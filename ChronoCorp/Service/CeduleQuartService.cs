@@ -1,6 +1,7 @@
 ﻿using ChronoCorp.Data;
 using ChronoCorp.Interface;
 using ChronoCorp.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,30 +12,30 @@ namespace ChronoCorp.Service
 {
     public class CeduleQuartService : ICeduleQuartService
     {
-        private readonly ICeduleQuartDataProvider _provider;
+        private readonly ApplicationDbContext _dbContext;
 
-        public CeduleQuartService(ICeduleQuartDataProvider provider)
+        public CeduleQuartService(ApplicationDbContext dbContext)
         {
-            _provider = provider;
+            _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<CeduleQuart>> GetAllCeduleQuartAsync()
+        public async Task<List<CeduleQuart>> GetAllCeduleQuartAsync()
         {
-            return await _provider.GetAllCeduleQuartAsync();
+            return await _dbContext.Cedule_Quart.ToListAsync();
         }
 
-        // ajouter date deb, date fin
-        public async Task<List<CeduleQuart>> GetCeduleQuartListByCreatorId(long id)
-        {
-            var cedules = await _provider.GetAllCeduleQuartAsync();
-            return cedules.Where(cedule => cedule.IdCreateur == id).ToList();
-        }
+        //// ajouter date deb, date fin
+        //public async Task<List<CeduleQuart>> GetCeduleQuartListByCreatorId(long id)
+        //{
+        //    var cedules = await _provider.GetAllCeduleQuartAsync();
+        //    return cedules.Where(cedule => cedule.IdCreateur == id).ToList();
+        //}
 
-        // ajouter date deb, date fin
-        public async Task<List<CeduleQuart>> GetCeduleQuartListByEmployeeId(long id)
-        {
-            var cedules = await _provider.GetAllCeduleQuartAsync();
-            return cedules.Where(cedule => cedule.IdEmployee == id).ToList();
-        }
+        //// ajouter date deb, date fin
+        //public async Task<List<CeduleQuart>> GetCeduleQuartListByEmployeeId(long id)
+        //{
+        //    var cedules = await _provider.GetAllCeduleQuartAsync();
+        //    return cedules.Where(cedule => cedule.IdEmployee == id).ToList();
+        //}
     }
 }
