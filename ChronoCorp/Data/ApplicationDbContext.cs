@@ -17,18 +17,28 @@ namespace ChronoCorp.Data
         public DbSet<Messagerie> Messagerie { get; set; }
         public DbSet<FichePaie> Fiche_Paie { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-        {}
+        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        //: base(options)
+        //{}
+
+        public ApplicationDbContext()
+        : base(new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseMySql("server=localhost;user=root;password=;database=chronocorp;",
+                       new MySqlServerVersion(new Version(8, 0, 23)))
+            .Options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "server=localhost;user=root;password=;database=chronocorp;";
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 23)));  // Version explicite
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<CeduleQuart>().HasOne(cedule => cedule.Employee).WithMany(emp => emp.CeduleQuartsEmp)
                 .HasForeignKey(cedule => cedule.IdEmployee).OnDelete(DeleteBehavior.Restrict);
 

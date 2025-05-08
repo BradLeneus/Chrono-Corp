@@ -31,6 +31,7 @@ namespace ChronoCorp
             ConfigureServices(serviceCollection, configuration);
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
+            var dbContext = _serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             var loginWindow = _serviceProvider.GetRequiredService<LoginView>();
             loginWindow.Show();
@@ -41,7 +42,11 @@ namespace ChronoCorp
             // Logging
             services.AddLogging();
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 31))));
+            //var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            //optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 31)));
+
+            services.AddSingleton(new ApplicationDbContext());
+
 
             // Services
             services.AddTransient<IMessagerieService, MessagerieService>();
