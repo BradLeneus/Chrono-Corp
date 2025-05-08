@@ -144,7 +144,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new EmployeeListView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new EmployeeListViewModel(CurrentEmployee, _employeeService)
             });
         }
 
@@ -162,7 +162,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new MyEmployeesView
             {
-                DataContext = new MyEmployeesViewModel(CurrentEmployee)
+                DataContext = new MyEmployeesViewModel(CurrentEmployee, _employeeService)
             });
         }
         

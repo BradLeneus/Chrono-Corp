@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using ChronoCorp.Model;
 
-public partial class EmployeeViewModel : BaseViewModel
+public partial class EmployeeViewModel : ObservableObject
 {
     private readonly Employee _model;
 

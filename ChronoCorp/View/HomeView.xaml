@@ -24,7 +24,11 @@
                 <Run Text="Bonjour" />
                 <Run Text="{Binding Prenom}" />
             </TextBlock>
-            <TextBlock Grid.Row="1">Vous avez {nbr} notifications non lues</TextBlock>
+            <TextBlock Grid.Row="1">
+                <Run Text="Vous avez" />
+                <Run Text="{Binding NbrMessages}" />
+                <Run Text="notifications." />
+            </TextBlock>
 
             <StackPanel Grid.Row="2" Visibility="{Binding SectionsForEmployeesVisibility}">
                 <DataGrid AutoGenerateColumns="False"

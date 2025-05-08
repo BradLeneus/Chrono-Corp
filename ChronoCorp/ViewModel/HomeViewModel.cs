@@ -19,6 +19,9 @@ namespace ChronoCorp.ViewModel
         private string role;
 
         [ObservableProperty]
+        private int nbrMessages;
+
+        [ObservableProperty]
         private ObservableCollection<MenuItemModel> subMenuItems;
 
         [ObservableProperty]
@@ -48,6 +51,7 @@ namespace ChronoCorp.ViewModel
             _messagerieService = messagerieService;
 
             LoadSubMenuItemModels();
+            LoadNbrMessages(employee);
 
             if (role == "Gestionnaire")
             {
@@ -154,6 +158,12 @@ namespace ChronoCorp.ViewModel
         {
             var messages = await _messagerieService.GetMessageByTypeMessageAndEmployeeAsync("approbation_conge", employee.Id);
             MessagesApprobationConge = new ObservableCollection<Messagerie>(messages);
+        }
+
+        public async Task LoadNbrMessages(Employee employee)
+        {
+            var nbr = await _messagerieService.GetMessageCountByEmployeeAsync(employee.Id);
+            NbrMessages = nbr;
         }
     }
 }

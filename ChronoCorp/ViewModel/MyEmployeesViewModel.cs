@@ -1,15 +1,13 @@
-﻿using ChronoCorp.Data;
+﻿using ChronoCorp.Interface;
 using ChronoCorp.Model;
-using ChronoCorp.Service;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace ChronoCorp.ViewModel
 {
-    public partial class MyEmployeesViewModel : BaseViewModel
+    public partial class MyEmployeesViewModel : ObservableObject
     {
-        private readonly EmployeeService _employeeService;
+        private readonly IEmployeeService _employeeService;
 
         [ObservableProperty]
         public ObservableCollection<Employee> myEmployees = new();
@@ -17,18 +15,17 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private Employee employee;
 
-        public MyEmployeesViewModel(Employee employee)
+        public MyEmployeesViewModel(Employee employee, IEmployeeService employeeService)
         {
-            var dataProvider = new EmployeeDataProvider();
-            //_employeeService = new EmployeeService(dataProvider);
             Employee = employee;
-            //_ = LoadMyEmployees();
+            _employeeService = employeeService;
+            _ = LoadMyEmployees();
         }
 
-        //public async Task LoadMyEmployees()
-        //{
-        //    var myEmployeesList = await _employeeService.GetEmployeeListByIdSuperiorAsync(Employee.Id);
-        //    MyEmployees = new ObservableCollection<Employee>(myEmployeesList);
-        //}
+        public async Task LoadMyEmployees()
+        {
+            var myEmployeesList = await _employeeService.GetEmployeeListByIdSuperiorAsync(Employee.Id);
+            MyEmployees = new ObservableCollection<Employee>(myEmployeesList);
+        }
     }
 }

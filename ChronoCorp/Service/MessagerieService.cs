@@ -23,5 +23,10 @@ namespace ChronoCorp.Service
         {
             return await _dbContext.Messagerie.Where(messages => messages.TypeMessage == type && messages.IdDestinataire == id).ToListAsync();
         }
+
+        public async Task<int> GetMessageCountByEmployeeAsync(long id)
+        {
+            return await _dbContext.Messagerie.CountAsync(messages => messages.IdDestinataire == id);
+        }
     }
 }

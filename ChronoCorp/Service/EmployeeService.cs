@@ -24,19 +24,9 @@ namespace ChronoCorp.Service
             return await _dbContext.Employee.FirstOrDefaultAsync(emp => emp.Id == id);
         }
 
-        //public async Task<List<Employee>?> GetEmployeeListByIdSuperiorAsync(long id)
-        //{
-        //    var employees = await _dbContext.GetAllEmployeesAsync();
-        //    if (employees == null)
-        //    {
-        //        Console.WriteLine("Employee list from provider is null!");
-        //        return null;
-        //    }
-
-        //    var result = employees.Where(emp => emp.IdSuperieur == id).ToList();
-
-        //    Console.WriteLine($"Filtering for IdSuperieur = {id}, found {result.Count} employees");
-        //    return result;
-        //}
+        public async Task<List<Employee>> GetEmployeeListByIdSuperiorAsync(long id)
+        {
+            return await _dbContext.Employee.Where(emp => emp.IdSuperieur == id).ToListAsync();
+        }
     }
 }
