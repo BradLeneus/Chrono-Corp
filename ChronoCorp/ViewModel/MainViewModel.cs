@@ -67,7 +67,6 @@ namespace ChronoCorp.ViewModel
 
             if (_role != "Gestionnaire")
             {
-                MenuItems.Add(new MenuItemModel { Title = "Mon horaire", Command = null });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mon horaire", Command = OpenScheduleCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Pointer ma présence", Command = OpenClockingCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Poser une demande congé", Command = OpenMyLeaveRequestCommand });
@@ -75,17 +74,14 @@ namespace ChronoCorp.ViewModel
 
                 if (_role == "Ressources humaines")
                 {
-                    MenuItems.Add(new MenuItemModel { Title = "Employés", Command = null });
                     MenuItems.Add(new MenuItemModel { Title = "Voir la liste des employés", Command = OpenEmployeeListCommand });
                     MenuItems.Add(new MenuItemModel { Title = "Ajouter un employé", Command = OpenAddEmployeeCommand });
                 }
             } else
             {
-                MenuItems.Add(new MenuItemModel { Title = "Mon horaire", Command = null });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mon horaire", Command = OpenScheduleCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Pointer ma présence", Command = OpenClockingCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mes fiches de paie", Command = OpenPaySlipsCommand });
-                MenuItems.Add(new MenuItemModel { Title = "Mes employés", Command = null });
                 MenuItems.Add(new MenuItemModel { Title = "Voir mes employés", Command = OpenMyEmployeesCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Gestion des horaires", Command = OpenScheduleManagementCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Gestion des pointages et des paies", Command = OpenClockingManagementCommand });
