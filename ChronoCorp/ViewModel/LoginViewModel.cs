@@ -11,13 +11,11 @@ namespace ChronoCorp.ViewModel
     public partial class LoginViewModel : ObservableObject
     {
         private readonly IAuthService _authService;
-
         private readonly IServiceProvider _serviceProvider;
-
         private readonly IEmployeeService _employeeService;
 
         [ObservableProperty]
-        private string username;
+        private int employeeId;
 
         [ObservableProperty]
         private string password;
@@ -25,7 +23,15 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private string loginMessage;
 
-        public LoginViewModel(IAuthService authService, IEmployeeService employeeService, IServiceProvider serviceProvider, IMessagerieService messagerieService, ICeduleQuartService ceduleQuartService, IDemandeCongeService demandeCongeService, IFichePaieService fichePaieService, ITypeQuartService typeQuartService)
+        public LoginViewModel(
+            IAuthService authService,
+            IEmployeeService employeeService,
+            IServiceProvider serviceProvider,
+            IMessagerieService messagerieService,
+            ICeduleQuartService ceduleQuartService,
+            IDemandeCongeService demandeCongeService,
+            IFichePaieService fichePaieService,
+            ITypeQuartService typeQuartService)
         {
             _authService = authService;
             _employeeService = employeeService;
@@ -35,19 +41,18 @@ namespace ChronoCorp.ViewModel
         [RelayCommand]
         public async Task LoginAsync()
         {
-            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+            if (EmployeeId <= 0 || string.IsNullOrWhiteSpace(Password))
             {
                 LoginMessage = "Veuillez remplir tous les champs.";
                 return;
             }
 
-            bool isValid = await _authService.AuthenticateAsync(Username, Password);
-            long userId = await _authService.GetEmployeeIdAsync(Username, Password);
-            string role = await _authService.GetEmployeeRoleAsync(Username, Password);
+            bool isValid = await _authService.AuthenticateAsync(EmployeeId, Password);
 
             if (isValid)
             {
-                Employee employee = await _employeeService.GetEmployeeByIdAsync(userId);
+                Employee employee = await _employeeService.GetEmployeeByIdAsync(EmployeeId);
+                string role = await _authService.GetEmployeeRoleAsync(EmployeeId, Password);
 
                 LoginMessage = "Connexion réussie";
 

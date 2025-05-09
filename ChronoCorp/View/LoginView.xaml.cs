@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
 using ChronoCorp.ViewModel;
 
 namespace ChronoCorp.View
@@ -14,19 +16,20 @@ namespace ChronoCorp.View
             DataContext = _viewModel;
         }
 
-        private async void OnLoginClick(object sender, RoutedEventArgs e)
+        // Synchronise le PasswordBox avec le ViewModel
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            _viewModel.Password = PasswordBox.Password;
-            await _viewModel.LoginAsync();
-
-            if (_viewModel.LoginMessage == "Connexion réussie")
+            if (DataContext is LoginViewModel vm)
             {
-                this.Close();
+                vm.Password = ((PasswordBox)sender).Password;
             }
         }
 
+        // Pour accepter uniquement des chiffres dans le champ EmployeeId
+        private void NumericOnly(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }
-
-
-
