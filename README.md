@@ -34,4 +34,4 @@ Build started...
 Build succeeded.
 Applying migration '20250508230848_UpdateBd'.
 ```
-- Prendre les donnes_bidon.sql dans le dossier Planification > sql et les mettre dans la bd
+- Prendre les donnes_bidon.sql dans le dossier Planification > sql et les insérer dans la bd
