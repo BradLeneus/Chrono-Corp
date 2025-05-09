@@ -16,7 +16,6 @@ namespace ChronoCorp.View
             DataContext = _viewModel;
         }
 
-        // Synchronise le PasswordBox avec le ViewModel
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is LoginViewModel vm)
@@ -25,7 +24,7 @@ namespace ChronoCorp.View
             }
         }
 
-        // Pour accepter uniquement des chiffres dans le champ EmployeeId
+        // Sert à empêcher l'utilisateur de saisir des caractères autres que des chiffres dans le TextBox
         private void NumericOnly(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
