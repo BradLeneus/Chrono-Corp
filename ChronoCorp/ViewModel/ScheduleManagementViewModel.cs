@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace ChronoCorp.ViewModel
 {
-    public partial class ScheduleViewModel : ObservableObject
+    public partial class ScheduleManagementViewModel : ObservableObject
     {
         private readonly ICeduleQuartService _ceduleQuartService;
 
@@ -15,17 +15,16 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private ObservableCollection<CeduleQuart> shiftList = new();
 
-        public ScheduleViewModel(Employee employee, ICeduleQuartService ceduleQuartService)
+        public ScheduleManagementViewModel(ICeduleQuartService ceduleQuartService)
         {
             _ceduleQuartService = ceduleQuartService;
-            Employee = employee;
-            _ = LoadMyShift(employee);
+            _ = LoadShiftAndClockingToApprove();
         }
 
         // ajouter filtre date?
-        public async Task LoadMyShift(Employee employee)
+        public async Task LoadShiftAndClockingToApprove()
         {
-            var shiftList = await _ceduleQuartService.GetQuartListByEmployeeId(employee.Id);
+            var shiftList = await _ceduleQuartService.GetAllCeduleQuartAsync();
             ShiftList = new ObservableCollection<CeduleQuart>(shiftList);
         }
     }

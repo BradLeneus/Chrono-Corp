@@ -5,11 +5,12 @@ namespace ChronoCorp.ViewModel
 {
     public partial class CheckLeaveStatusViewModel : ObservableObject
     {
-        private readonly User _user;
+        [ObservableProperty]
+        private Employee employee;
 
-        public CheckLeaveStatusViewModel(User user)
+        public CheckLeaveStatusViewModel(Employee employee)
         {
-            _user = user;
+            Employee = employee;
             //dateDebut = DateTime.Now;
             //dateFin = DateTime.Now;
         }

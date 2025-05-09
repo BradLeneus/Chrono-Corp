@@ -47,7 +47,7 @@ namespace ChronoCorp
             services.AddTransient<IDemandeCongeService, DemandeCongeService>();
             services.AddTransient<IFichePaieService, FichePaieService>();
             services.AddTransient<ITypeQuartService, TypeQuartService>();
-            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddSingleton<IAuthService, AuthService>();
 
             // ViewModels

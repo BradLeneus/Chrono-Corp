@@ -11,7 +11,7 @@ public partial class EmployeeListViewModel : ObservableObject
     private Employee employee;
 
     [ObservableProperty]
-    public ObservableCollection<Employee> employees = new();
+    private ObservableCollection<Employee> employees = new();
 
     public EmployeeListViewModel(Employee employee, IEmployeeService employeeService)
     {

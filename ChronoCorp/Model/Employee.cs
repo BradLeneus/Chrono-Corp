@@ -34,7 +34,6 @@ namespace ChronoCorp.Model
         public EmployeeCredentials employeeCredentials { get; set; }
         public ICollection<CeduleQuart> CeduleQuartsEmp { get; set; }
         public ICollection<CeduleQuart> CeduleQuartsGest { get; set; }
-        public ICollection<CedulePointage> CedulePointages { get; set; }
         public ICollection<DemandeConge> DemandeConges { get; set; }
         public ICollection<DemandeConge> ApprobationConges { get; set; }
         public ICollection<FichePaie> FichePaies { get; set; }

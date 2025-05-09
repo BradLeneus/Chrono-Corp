@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChronoCorp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250507012437_TestPrimaryKeyAndRelation")]
-    partial class TestPrimaryKeyAndRelation
+    [Migration("20250508230848_UpdateBd")]
+    partial class UpdateBd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,31 +24,6 @@ namespace ChronoCorp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("ChronoCorp.Model.CedulePointage", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("HeureDebut")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("HeureFin")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long>("IdEmployee")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsPause")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cedule_Pointage");
-                });
 
             modelBuilder.Entity("ChronoCorp.Model.CeduleQuart", b =>
                 {
@@ -61,6 +36,12 @@ namespace ChronoCorp.Migrations
                     b.Property<DateTime>("HeureDebut")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<DateTime?>("HeureDepart")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("HeureEntree")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("HeureFin")
                         .HasColumnType("datetime(6)");
 
@@ -70,10 +51,22 @@ namespace ChronoCorp.Migrations
                     b.Property<long>("IdEmployee")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("IsPausePayee")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPointageApprouve")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("TypeQuart")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdCreateur");
+
+                    b.HasIndex("IdEmployee");
+
+                    b.HasIndex("TypeQuart");
 
                     b.ToTable("Cedule_Quart");
                 });
@@ -119,6 +112,12 @@ namespace ChronoCorp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdDestinataire");
+
+                    b.HasIndex("IdEmetteur");
+
+                    b.HasIndex("TypeQuart");
+
                     b.ToTable("Demande_Conge");
                 });
 
@@ -149,6 +148,7 @@ namespace ChronoCorp.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Courriel")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("DateEmbauche")
@@ -158,13 +158,14 @@ namespace ChronoCorp.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Departement")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("EstActif")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("IdSuperieur")
-                        .HasColumnType("int");
+                    b.Property<long?>("IdSuperieur")
+                        .HasColumnType("bigint");
 
                     b.Property<float?>("NbrHeureConge")
                         .HasColumnType("float");
@@ -188,12 +189,15 @@ namespace ChronoCorp.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Telephone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Ville")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdSuperieur");
 
                     b.ToTable("Employee");
                 });
@@ -247,6 +251,8 @@ namespace ChronoCorp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdEmployee");
+
                     b.ToTable("Fiche_Paie");
                 });
 
@@ -277,16 +283,20 @@ namespace ChronoCorp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdDestinataire");
+
+                    b.HasIndex("IdEmetteur");
+
                     b.ToTable("Messagerie");
                 });
 
             modelBuilder.Entity("ChronoCorp.Model.TypeQuart", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -310,6 +320,69 @@ namespace ChronoCorp.Migrations
                     b.ToTable("Type_Quart");
                 });
 
+            modelBuilder.Entity("ChronoCorp.Model.CeduleQuart", b =>
+                {
+                    b.HasOne("ChronoCorp.Model.Employee", "Gestionnaire")
+                        .WithMany("CeduleQuartsGest")
+                        .HasForeignKey("IdCreateur")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ChronoCorp.Model.Employee", "Employee")
+                        .WithMany("CeduleQuartsEmp")
+                        .HasForeignKey("IdEmployee")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ChronoCorp.Model.TypeQuart", "TypeDuQuart")
+                        .WithMany("CeduleQuarts")
+                        .HasForeignKey("TypeQuart")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Gestionnaire");
+
+                    b.Navigation("TypeDuQuart");
+                });
+
+            modelBuilder.Entity("ChronoCorp.Model.DemandeConge", b =>
+                {
+                    b.HasOne("ChronoCorp.Model.Employee", "Gestionnaire")
+                        .WithMany("ApprobationConges")
+                        .HasForeignKey("IdDestinataire")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ChronoCorp.Model.Employee", "Employee")
+                        .WithMany("DemandeConges")
+                        .HasForeignKey("IdEmetteur")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ChronoCorp.Model.TypeQuart", "TypeQuarts")
+                        .WithMany("DemandesConges")
+                        .HasForeignKey("TypeQuart")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Gestionnaire");
+
+                    b.Navigation("TypeQuarts");
+                });
+
+            modelBuilder.Entity("ChronoCorp.Model.Employee", b =>
+                {
+                    b.HasOne("ChronoCorp.Model.Employee", "Gestionnaire")
+                        .WithMany()
+                        .HasForeignKey("IdSuperieur");
+
+                    b.Navigation("Gestionnaire");
+                });
+
             modelBuilder.Entity("ChronoCorp.Model.EmployeeCredentials", b =>
                 {
                     b.HasOne("ChronoCorp.Model.Employee", "Employee")
@@ -321,10 +394,61 @@ namespace ChronoCorp.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("ChronoCorp.Model.FichePaie", b =>
+                {
+                    b.HasOne("ChronoCorp.Model.Employee", "Employee")
+                        .WithMany("FichePaies")
+                        .HasForeignKey("IdEmployee")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("ChronoCorp.Model.Messagerie", b =>
+                {
+                    b.HasOne("ChronoCorp.Model.Employee", "Employee2")
+                        .WithMany("MessagerieReceiver")
+                        .HasForeignKey("IdDestinataire")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ChronoCorp.Model.Employee", "Employee1")
+                        .WithMany("MessagerieSender")
+                        .HasForeignKey("IdEmetteur")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Employee1");
+
+                    b.Navigation("Employee2");
+                });
+
             modelBuilder.Entity("ChronoCorp.Model.Employee", b =>
                 {
+                    b.Navigation("ApprobationConges");
+
+                    b.Navigation("CeduleQuartsEmp");
+
+                    b.Navigation("CeduleQuartsGest");
+
+                    b.Navigation("DemandeConges");
+
+                    b.Navigation("FichePaies");
+
+                    b.Navigation("MessagerieReceiver");
+
+                    b.Navigation("MessagerieSender");
+
                     b.Navigation("employeeCredentials")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ChronoCorp.Model.TypeQuart", b =>
+                {
+                    b.Navigation("CeduleQuarts");
+
+                    b.Navigation("DemandesConges");
                 });
 #pragma warning restore 612, 618
         }

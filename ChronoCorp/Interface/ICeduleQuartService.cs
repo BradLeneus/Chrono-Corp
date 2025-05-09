@@ -9,6 +9,7 @@ namespace ChronoCorp.Interface
 {
     public interface ICeduleQuartService
     {
+        Task<List<CeduleQuart>> GetAllCeduleQuartAsync();
         Task<List<CeduleQuart>> GetQuartListByEmployeeId(long id);
     }
 }

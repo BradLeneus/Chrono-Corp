@@ -1,6 +1,5 @@
 ﻿using ChronoCorp.Interface;
 using ChronoCorp.Model;
-using ChronoCorp.Service;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -50,7 +49,7 @@ namespace ChronoCorp.ViewModel
             CurrentView = new HomeView
             {
                 DataContext = new 
-                HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService)
+                HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService, _demandeCongeService, _ceduleQuartService)
             };
         }
 
@@ -99,16 +98,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new HomeView
             {
-                DataContext = new HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService)
-            });
-        }
-
-        [RelayCommand]
-        private void OpenProfile()
-        {
-            NavigateTo(new ProfileView
-            {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService, _demandeCongeService, _ceduleQuartService)
             });
         }
 
@@ -117,7 +107,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new AddEmployeeView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new AddEmployeeViewModel(_employeeService)
             });
         }
         
@@ -126,7 +116,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new ClockingManagementView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new ClockingManagementViewModel(_ceduleQuartService)
             });
         }
         
@@ -135,7 +125,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new ClockingView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new ClockingViewModel(CurrentEmployee, _ceduleQuartService)
             });
         }
         
@@ -153,7 +143,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new MyEmployeesLeaveRequestView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new MyEmployeesLeaveRequestViewModel(CurrentEmployee, _demandeCongeService)
             });
         }
 
@@ -172,7 +162,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new MyLeaveRequestView
             {
-                //DataContext = new MyLeaveRequestViewModel(currentUser)
+                DataContext = new MyLeaveRequestViewModel(CurrentEmployee, _demandeCongeService)
             });
         }
         
@@ -191,7 +181,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new ScheduleManagementView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
             });
         }
         
@@ -200,7 +190,7 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new ScheduleView
             {
-                //DataContext = new ProfileViewModel(currentUser)
+                DataContext = new ScheduleViewModel(CurrentEmployee, _ceduleQuartService)
             });
         }
     }

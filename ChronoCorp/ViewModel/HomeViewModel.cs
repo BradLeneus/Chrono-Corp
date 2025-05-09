@@ -1,7 +1,5 @@
-﻿using ChronoCorp.Data;
-using ChronoCorp.Interface;
+﻿using ChronoCorp.Interface;
 using ChronoCorp.Model;
-using ChronoCorp.Service;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -48,7 +46,11 @@ namespace ChronoCorp.ViewModel
 
         private IFichePaieService _fichePaieService;
 
-        public HomeViewModel(Employee employee, string role, INavigationService navigationService, IMessagerieService messagerieService, IFichePaieService fichePaieService)
+        private IDemandeCongeService _demandeCongeService;
+
+        private ICeduleQuartService _ceduleQuartService;
+
+        public HomeViewModel(Employee employee, string role, INavigationService navigationService, IMessagerieService messagerieService, IFichePaieService fichePaieService, IDemandeCongeService demandeCongeService, ICeduleQuartService ceduleQuartService)
         {
             Prenom = employee.Prenom;
             Role = role;
@@ -56,6 +58,8 @@ namespace ChronoCorp.ViewModel
             _navigationService = navigationService;
             _messagerieService = messagerieService;
             _fichePaieService = fichePaieService;
+            _demandeCongeService = demandeCongeService;
+            _ceduleQuartService = ceduleQuartService;
 
             LoadSubMenuItemModels();
             LoadNbrMessages(employee);
@@ -96,7 +100,7 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new MyLeaveRequestView
             {
-                DataContext = new MyLeaveRequestViewModel(null)
+                DataContext = new MyLeaveRequestViewModel(Employee, _demandeCongeService)
             });
         }
 
@@ -105,7 +109,7 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new MyEmployeesLeaveRequestView
             {
-                //DataContext = new MyLeaveRequestViewModel(null)
+                DataContext = new MyEmployeesLeaveRequestViewModel(Employee, _demandeCongeService)
             });
         }
 
@@ -119,11 +123,11 @@ namespace ChronoCorp.ViewModel
         }
 
         [RelayCommand]
-        private void NavigateToClockingManagement()
+        private void NavigateToClocking()
         {
-            _navigationService.NavigateTo(new ClockingManagementView
+            _navigationService.NavigateTo(new ClockingView
             {
-                //DataContext = new PaySlipsViewModel(_user)
+                DataContext = new ClockingViewModel(Employee, _ceduleQuartService)
             });
         }
         [RelayCommand]
@@ -131,15 +135,15 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new ScheduleManagementView
             {
-                //DataContext = new PaySlipsViewModel(_user)
+                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
             });
         }
         [RelayCommand]
-        private void NavigateToClocking()
+        private void NavigateToClockingManagement()
         {
             _navigationService.NavigateTo(new ClockingView
             {
-                //DataContext = new PaySlipsViewModel(_user)
+                DataContext = new ClockingManagementViewModel(_ceduleQuartService)
             });
         }
         [RelayCommand]
@@ -147,7 +151,7 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new ScheduleView
             {
-                //DataContext = new PaySlipsViewModel(_user)
+                DataContext = new ScheduleViewModel(Employee, _ceduleQuartService)
             });
         }
 

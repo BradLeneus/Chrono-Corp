@@ -22,30 +22,6 @@ namespace ChronoCorp.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("ChronoCorp.Model.CedulePointage", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("HeureDebut")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("HeureFin")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long>("IdEmployee")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdEmployee");
-
-                    b.ToTable("CedulePointage");
-                });
-
             modelBuilder.Entity("ChronoCorp.Model.CeduleQuart", b =>
                 {
                     b.Property<long>("Id")
@@ -341,17 +317,6 @@ namespace ChronoCorp.Migrations
                     b.ToTable("Type_Quart");
                 });
 
-            modelBuilder.Entity("ChronoCorp.Model.CedulePointage", b =>
-                {
-                    b.HasOne("ChronoCorp.Model.Employee", "Employee")
-                        .WithMany("CedulePointages")
-                        .HasForeignKey("IdEmployee")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("ChronoCorp.Model.CeduleQuart", b =>
                 {
                     b.HasOne("ChronoCorp.Model.Employee", "Gestionnaire")
@@ -459,8 +424,6 @@ namespace ChronoCorp.Migrations
             modelBuilder.Entity("ChronoCorp.Model.Employee", b =>
                 {
                     b.Navigation("ApprobationConges");
-
-                    b.Navigation("CedulePointages");
 
                     b.Navigation("CeduleQuartsEmp");
 

@@ -6,7 +6,8 @@ namespace ChronoCorp.ViewModel
 {
     public partial class NewLeaveViewModel : ObservableObject
     {
-        private readonly User _user;
+        [ObservableProperty]
+        private Employee employee;
 
         /* [ObservableProperty]
         private string typeQuart;
@@ -20,9 +21,9 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private string commentaire;*/
 
-        public NewLeaveViewModel(User user)
+        public NewLeaveViewModel(Employee employee)
         {
-            _user = user;
+            Employee = employee;
             //dateDebut = DateTime.Now;
             //dateFin = DateTime.Now;
         }

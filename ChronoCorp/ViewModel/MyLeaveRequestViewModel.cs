@@ -1,25 +1,42 @@
-﻿using ChronoCorp.Model;
+﻿using ChronoCorp.Interface;
+using ChronoCorp.Model;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace ChronoCorp.ViewModel
 {
     public partial class MyLeaveRequestViewModel : ObservableObject
     {
-        private readonly User _user;
+        private readonly IDemandeCongeService _demandeCongeService;
+
+        [ObservableProperty]
+        private Employee employee;
 
         [ObservableProperty]
         private object currentLeaveView;
 
-        public MyLeaveRequestViewModel(User user)
+        [ObservableProperty]
+        private ObservableCollection<DemandeConge> leaveRequest = new();
+
+        public MyLeaveRequestViewModel(Employee employee, IDemandeCongeService demandeCongeService)
         {
-            _user = user;
+            Employee = employee;
+            _demandeCongeService = demandeCongeService;
+            _ = LoadMyLeaveRequest(employee);
+
 
             CurrentLeaveView = new CheckLeaveStatusView
             {
-                DataContext = new CheckLeaveStatusViewModel(_user)
+                DataContext = new CheckLeaveStatusViewModel(Employee)
             };
+        }
+
+        private async Task LoadMyLeaveRequest(Employee employee)
+        {
+            var leaveRequestList = await _demandeCongeService.GetDemandeCongeListByIdEmetteur(employee.Id);
+            LeaveRequest = new ObservableCollection<DemandeConge>(leaveRequestList);
         }
 
         [RelayCommand]
@@ -27,7 +44,7 @@ namespace ChronoCorp.ViewModel
         {
             CurrentLeaveView = new NewLeaveView
             {
-                DataContext = new NewLeaveViewModel(_user)
+                DataContext = new NewLeaveViewModel(Employee)
             };
         }
     }
