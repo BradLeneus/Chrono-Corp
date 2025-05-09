@@ -29,7 +29,10 @@ dotnet restore
 dotnet ef database update
 ```
 ceci devrait être le résultat:
+
 Build started...
+
 Build succeeded.
+
 Applying migration '20250508230848_UpdateBd'.
 - Prendre les donnes_bidon.sql et les mettre dans la bd
