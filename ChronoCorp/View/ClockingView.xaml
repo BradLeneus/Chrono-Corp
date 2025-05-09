@@ -19,16 +19,17 @@
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Pointage</TextBlock>
             <StackPanel Grid.Row="1">
                 <DataGrid AutoGenerateColumns="False"
-                              ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                              CellStyle="{StaticResource DataGridCellStyle}"
-                              BorderBrush="{StaticResource LightBlueColor}"
-                              RowStyle="{StaticResource DataGridRowStyle}"
-                              GridLinesVisibility="None">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          ItemsSource="{Binding ShiftToClock}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Heure début" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Heure fin" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure début" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure fin" Width="*" IsReadOnly="True" Binding="{Binding HeureFin}"/>
                         <DataGridTextColumn Header="Entrée" Width="*"/>
                         <DataGridTextColumn Header="Sortie" Width="*"/>
                     </DataGrid.Columns>

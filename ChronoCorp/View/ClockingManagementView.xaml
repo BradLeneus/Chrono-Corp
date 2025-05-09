@@ -25,20 +25,21 @@
                     <Button Style="{StaticResource DarkBlueButton2Style}">Appliquer</Button>
                 </StackPanel>
                 <DataGrid AutoGenerateColumns="False"
-                      ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                      CellStyle="{StaticResource DataGridCellStyle}"
-                      BorderBrush="{StaticResource LightBlueColor}"
-                      RowStyle="{StaticResource DataGridRowStyle}"
-                      GridLinesVisibility="None">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          ItemsSource="{Binding ShiftClockToApproveList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Employé" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Quart début" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Quart fin" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Pointage entrée" Width="*"/>
-                        <DataGridTextColumn Header="Pointage fin" Width="*"/>
-                        <DataGridTextColumn Header="Approbation" Width="*"/>
+                        <DataGridTextColumn Header="Employé" Width="*" IsReadOnly="True" Binding="{Binding IdEmployee}"/>
+                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Quart début" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Quart fin" Width="*" IsReadOnly="True" Binding="{Binding HeureFin}"/>
+                        <DataGridTextColumn Header="Pointage entrée" Width="*" Binding="{Binding HeureEntree}"/>
+                        <DataGridTextColumn Header="Pointage fin" Width="*" Binding="{Binding HeureDepart}"/>
+                        <DataGridTextColumn Header="Approbation" Width="*" Binding="{Binding IsPointageApprouve}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

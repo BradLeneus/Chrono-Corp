@@ -18,19 +18,20 @@
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Gestion des horaires</TextBlock>
             <StackPanel Grid.Row="1">
                 <DataGrid AutoGenerateColumns="False"
-                      ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                      CellStyle="{StaticResource DataGridCellStyle}"
-                      BorderBrush="{StaticResource LightBlueColor}"
-                      RowStyle="{StaticResource DataGridRowStyle}"
-                      GridLinesVisibility="None">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          ItemsSource="{Binding ShiftList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Jour" Width="*"/>
-                        <DataGridTextColumn Header="Date" Width="*"/>
-                        <DataGridTextColumn Header="Heure début" Width="*"/>
-                        <DataGridTextColumn Header="Heure fin" Width="*"/>
-                        <DataGridTextColumn Header="Pause" Width="*"/>
+                        <DataGridTextColumn Header="Jour" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure début" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure fin" Width="*" Binding="{Binding HeureFin}"/>
+                        <DataGridTextColumn Header="Pause Payée?" Width="*" Binding="{Binding IsPausePayee}"/>
                         <DataGridTextColumn Header="Nbr d'heures" Width="*"/>
-                        <DataGridTextColumn Header="Type du quart" Width="*"/>
+                        <DataGridTextColumn Header="Type du quart" Width="*" Binding="{Binding TypeQuart}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
