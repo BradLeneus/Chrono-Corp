@@ -11,7 +11,7 @@ ChronoCorop est une application moderne et intuitive pour les entreprises qui of
 ## Étapes de déploiement
 - Créer une bd "chronocorp" dans Heidi
 - À partir des fichiers, double-cliquez sur ChronoCorp.sln
-- Onglet Outils>Gestionnaires de package NuGet>Console du gestionnaires de package (ou git bash depuis le dossier ChronoCorp)
+- Onglet Outils > Gestionnaires de package NuGet > Console du gestionnaires de package (ou git bash depuis le dossier ChronoCorp)
 ```
 cd ChronoCorp
 ```
@@ -34,4 +34,4 @@ Build started...
 Build succeeded.
 Applying migration '20250508230848_UpdateBd'.
 ```
-- Prendre les donnes_bidon.sql et les mettre dans la bd
+- Prendre les donnes_bidon.sql dans le dossier Planification > sql et les mettre dans la bd
