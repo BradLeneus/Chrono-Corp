@@ -27,5 +27,11 @@ namespace ChronoCorp.ViewModel
             var shiftList = await _ceduleQuartService.GetAllCeduleQuartAsync();
             ShiftList = new ObservableCollection<CeduleQuart>(shiftList);
         }
+
+        //Implémenter SendMyShift()?
+        public async Task SendShiftToEmployee(Employee employee)
+        {
+
+        }
     }
 }
