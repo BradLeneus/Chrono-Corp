@@ -20,18 +20,19 @@
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Demandes de congés de mes employés</TextBlock>
             <StackPanel Grid.Row="1">
                 <DataGrid AutoGenerateColumns="False"
-                        ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                        CellStyle="{StaticResource DataGridCellStyle}"
-                        BorderBrush="{StaticResource LightBlueColor}"
-                        RowStyle="{StaticResource DataGridRowStyle}"
-                        GridLinesVisibility="None"
-                        IsReadOnly="True">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding LeaveRequest}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Employé" Width="*"/>
-                        <DataGridTextColumn Header="Date début" Width="*"/>
-                        <DataGridTextColumn Header="Date fin" Width="*"/>
-                        <DataGridTextColumn Header="Type de congé" Width="*"/>
-                        <DataGridTextColumn Header="Date de la demande" Width="*"/>
+                        <DataGridTextColumn Header="Employé" Width="*" Binding="{Binding IdEmetteur}"/>
+                        <DataGridTextColumn Header="Date début" Width="*" Binding="{Binding DateDebut}"/>
+                        <DataGridTextColumn Header="Date fin" Width="*" Binding="{Binding DateFin}"/>
+                        <DataGridTextColumn Header="Type de congé" Width="*" Binding="{Binding TypeQuart}"/>
+                        <DataGridTextColumn Header="Date de la demande" Width="*" Binding="{Binding TempsSoumission}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

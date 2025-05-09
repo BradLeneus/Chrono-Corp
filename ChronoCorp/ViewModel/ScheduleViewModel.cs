@@ -13,7 +13,7 @@ namespace ChronoCorp.ViewModel
         private Employee employee;
 
         [ObservableProperty]
-        private ObservableCollection<CeduleQuart> shiftList = new();
+        private ObservableCollection<CeduleQuart> myShiftList = new();
 
         public ScheduleViewModel(Employee employee, ICeduleQuartService ceduleQuartService)
         {
@@ -26,7 +26,7 @@ namespace ChronoCorp.ViewModel
         public async Task LoadMyShift(Employee employee)
         {
             var shiftList = await _ceduleQuartService.GetQuartListByEmployeeId(employee.Id);
-            ShiftList = new ObservableCollection<CeduleQuart>(shiftList);
+            MyShiftList = new ObservableCollection<CeduleQuart>(shiftList);
         }
     }
 }

@@ -26,7 +26,7 @@
                           RowStyle="{StaticResource DataGridRowStyle}"
                           GridLinesVisibility="None"
                           IsReadOnly="True"
-                          ItemsSource="{Binding PaySlipsList}">
+                          ItemsSource="{Binding FichePaies}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Numéro de la paie" Width="*" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Date début" Width="*" Binding="{Binding DateDebut}"/>

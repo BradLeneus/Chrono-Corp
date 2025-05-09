@@ -18,7 +18,7 @@ namespace ChronoCorp.ViewModel
         private Employee employee;
 
         [ObservableProperty]
-        private ObservableCollection<CeduleQuart> shiftToClockList = new();
+        private ObservableCollection<CeduleQuart> shiftClockToApproveList = new();
 
         public ClockingManagementViewModel(ICeduleQuartService ceduleQuartService)
         {
@@ -30,7 +30,7 @@ namespace ChronoCorp.ViewModel
         public async Task LoadShiftAndClockingToApprove()
         {
             var shiftList = await _ceduleQuartService.GetAllCeduleQuartAsync();
-            ShiftToClockList = new ObservableCollection<CeduleQuart>(shiftList);
+            ShiftClockToApproveList = new ObservableCollection<CeduleQuart>(shiftList);
         }
     }
 }

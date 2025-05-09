@@ -21,21 +21,22 @@
             <StackPanel Grid.Row="1">
                 <TextBlock>Demandes précédentes</TextBlock>
                 <DataGrid AutoGenerateColumns="False"
-                        ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                        CellStyle="{StaticResource DataGridCellStyle}"
-                        BorderBrush="{StaticResource LightBlueColor}"
-                        RowStyle="{StaticResource DataGridRowStyle}"
-                        GridLinesVisibility="None"
-                        IsReadOnly="True">
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          IsReadOnly="True"
+                          ItemsSource="{Binding LeaveRequest}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Type de la demande" Width="0.6*"/>
-                        <DataGridTextColumn Header="Statut" Width="0.2*"/>
-                        <DataGridTextColumn Header="Mis à jour le" Width="0.2*"/>
+                        <DataGridTextColumn Header="Type de la demande" Width="0.6*" Binding="{Binding TypeQuart}"/>
+                        <DataGridTextColumn Header="Statut" Width="0.2*" Binding="{Binding EstApprouve}"/>
+                        <DataGridTextColumn Header="Mis à jour le" Width="0.2*" Binding="{Binding TempsModif}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Style="{StaticResource DarkBlueButtonStyle}" Command="{Binding OpenNewLeaveRequestViewCommand}">Nouvelle demande</Button>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="20 0 0 0">
                 <ContentControl Content="{Binding CurrentLeaveView}"/>
             </StackPanel>
         </Grid>
