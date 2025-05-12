@@ -20,9 +20,12 @@ public partial class EmployeeListViewModel : ObservableObject
         _ = LoadAllEmployees();
     }
 
-    private async Task LoadAllEmployees()
+    public async Task LoadAllEmployees()
     {
         var employeesList = await _employeeService.GetAllEmployeesAsync();
-        Employees = new ObservableCollection<Employee>(employeesList);
+        if (employeesList != null)
+        {
+            Employees = new ObservableCollection<Employee>(employeesList);
+        }
     }
 }
