@@ -2,13 +2,7 @@
 using ChronoCorp.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChronoCorp.ViewModel
 {
@@ -69,36 +63,11 @@ namespace ChronoCorp.ViewModel
         [ObservableProperty]
         private bool _estActif;
 
-
-        //public async Task SaveAsync()
-        //{
-        //    var newEmployee = new Employee
-        //    {
-        //        Prenom = Prenom,
-        //        Nom = Nom,
-        //        DateNaissance = DateNaissance,
-        //        AdresseLigne1 = AdresseLigne1,
-        //        Ville = Ville,
-        //        CodePostal = CodePostal,
-        //        Telephone = Telephone,
-        //        Courriel = Courriel,
-        //        Id = Id,
-        //        IdSuperieur = IdSuperieur,
-        //        Gestionnaire = Gestionnaire,
-        //        Departement = Departement,
-        //        Poste = Poste,
-        //        Salaire = Salaire,
-        //        DateEmbauche = DateEmbauche,
-        //        EstActif = EstActif
-        //    };
-
-        //    await _employeeService.AddNewEmployeeAsync(newEmployee);
-        //}
-
         public AddEmployeeViewModel(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
             Employees = new ObservableCollection<Employee>();
+
             NewEmployee = new Employee
             {
                 Prenom = "",
@@ -124,6 +93,7 @@ namespace ChronoCorp.ViewModel
         {
             await _employeeService.AddNewEmployeeAsync(NewEmployee);
             Employees.Add(NewEmployee);
+
             NewEmployee = new Employee
             {
                 Prenom = "",

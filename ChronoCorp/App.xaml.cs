@@ -55,13 +55,13 @@ namespace ChronoCorp
             // ViewModels
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<AddEmployeeViewModel>();
-            // services.AddSingleton<EditEmployeeViewModel>();
+            services.AddSingleton<EditEmployeeViewModel>();
 
             // Views
             services.AddSingleton<LoginView>();
             services.AddSingleton<MainWindow>();
             services.AddSingleton<AddEmployeeView>();
-            // services.AddSingleton<EditEmployeeView>();
+            services.AddSingleton<EditEmployeeView>();
         }
 
         private void OnExit(object sender, ExitEventArgs e)

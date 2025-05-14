@@ -11,6 +11,6 @@ namespace ChronoCorp.Interface
 
         Task AddNewEmployeeAsync(Employee employee);
 
-        // Task UpdateEmployeeAsync(Employee employee);
+        Task UpdateEmployeeAsync(Employee employee);
     }
 }

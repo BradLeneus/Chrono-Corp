@@ -34,5 +34,11 @@ namespace ChronoCorp.Service
             _dbContext.Employee.Add(employee);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateEmployeeAsync(Employee employee)
+        {
+            _dbContext.Employee.Update(employee);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
