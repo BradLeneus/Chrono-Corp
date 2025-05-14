@@ -5,13 +5,13 @@ using ChronoCorp.ViewModel;
 namespace ChronoCorp.View
 {
     /// <summary>
-    /// Logique d'interaction pour AddEmployeeView.xaml
+    /// Interaction logic for EditEmployeeView.xaml
     /// </summary>
-    public partial class AddEmployeeView : UserControl
+    public partial class EditEmployeeView : UserControl
     {
-        private readonly AddEmployeeViewModel _viewModel;
+        private readonly EditEmployeeViewModel _viewModel;
 
-        public AddEmployeeView(AddEmployeeViewModel viewModel)
+        public EditEmployeeView(EditEmployeeViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;

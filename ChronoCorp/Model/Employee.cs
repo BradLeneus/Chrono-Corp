@@ -31,6 +31,11 @@ namespace ChronoCorp.Model
 
         public Employee Gestionnaire { get; set; }
 
+        public string NomComplet 
+        {
+            get { return $"{Prenom} {Nom}"; }
+        }
+
         public EmployeeCredentials employeeCredentials { get; set; }
         public ICollection<CeduleQuart> CeduleQuartsEmp { get; set; }
         public ICollection<CeduleQuart> CeduleQuartsGest { get; set; }
