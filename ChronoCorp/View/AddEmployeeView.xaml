@@ -21,68 +21,68 @@
                 <TextBlock Style="{StaticResource FormTitleStyle}">Renseignements relatifs à l'employé</TextBlock>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Prénom</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Prenom, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Nom</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Nom, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Date de naissance</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.DateNaissance, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Adresse civique</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.AdresseLigne1, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Ville</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Ville, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Code Postal</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.CodePostal, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
-                    <Label Style="{StaticResource LabelStyle}">Contact d'urgence - nom complet</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <Label Style="{StaticResource LabelStyle}">Téléphone</Label>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Telephone, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
-                    <Label Style="{StaticResource LabelStyle}">Contact d'urgence - téléphone</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <Label Style="{StaticResource LabelStyle}">Courriel</Label>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Courriel, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource StackPanelViewStyle}">
                 <TextBlock Style="{StaticResource FormTitleStyle}">Renseignements relatifs au poste</TextBlock>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Numéro d'employé</Label>
-                    <TextBox Style="{StaticResource FormInputDisabledStyle}" IsEnabled="False"/>
+                    <TextBox Style="{StaticResource FormInputDisabledStyle}" IsEnabled="True" Text="{Binding NewEmployee.Id, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Nom du supérieur</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.IdSuperieur, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Département</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Departement, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Poste</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Poste, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Salaire</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.Salaire, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Date d'embauche</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.DateEmbauche, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}">
                     <Label Style="{StaticResource LabelStyle}">Est actif</Label>
-                    <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding NewEmployee.EstActif, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <Button Style="{StaticResource DarkBlueButtonStyle}">Sauvegarder</Button>
+                <Button Style="{StaticResource DarkBlueButtonStyle}" Click="OnSaveClick">Sauvegarder</Button>
             </StackPanel>
                 
         </Grid>

@@ -28,5 +28,11 @@ namespace ChronoCorp.Service
         {
             return await _dbContext.Employee.Where(emp => emp.IdSuperieur == id).ToListAsync();
         }
+
+        public async Task AddNewEmployeeAsync(Employee employee)
+        {
+            _dbContext.Employee.Add(employee);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

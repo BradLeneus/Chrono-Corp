@@ -101,10 +101,8 @@ namespace ChronoCorp.ViewModel
         [RelayCommand]
         private void OpenAddEmployee()
         {
-            NavigateTo(new AddEmployeeView
-            {
-                DataContext = new AddEmployeeViewModel(_employeeService)
-            });
+            var vm = new AddEmployeeViewModel(_employeeService);
+            NavigateTo(new AddEmployeeView(vm));
         }
         
         [RelayCommand]

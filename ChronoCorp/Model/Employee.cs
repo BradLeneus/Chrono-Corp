@@ -31,7 +31,7 @@ namespace ChronoCorp.Model
 
         public Employee Gestionnaire { get; set; }
 
-        public string nomComplet 
+        public string NomComplet 
         {
             get { return $"{Prenom} {Nom}"; }
         }

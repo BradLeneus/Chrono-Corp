@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ChronoCorp.Data;
 using ChronoCorp.Interface;
 using ChronoCorp.Model;
@@ -20,20 +21,9 @@ namespace ChronoCorp.View
         public EmployeeListView()
         {
             InitializeComponent();
-            IEmployeeService employeeService = new EmployeeService();
-
-            _viewModel = new EmployeeListViewModel(new Employee{ 
-                Prenom = "", 
-                Nom = "", 
-                Courriel = "", 
-                Telephone = "", 
-                Departement = "", 
-                Poste = "" 
-            }, employeeService);
-
             DataContext = _viewModel;
-            
         }
+
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             await _viewModel.LoadAllEmployees();
