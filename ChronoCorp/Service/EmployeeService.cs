@@ -19,9 +19,14 @@ namespace ChronoCorp.Service
             return await _dbContext.Employee.ToListAsync();
         }
 
-        public async Task<Employee?> GetEmployeeByIdAsync(long id)
+        public async Task<Employee> GetEmployeeByIdAsync(long id)
         {
-            return await _dbContext.Employee.FirstOrDefaultAsync(emp => emp.Id == id);
+            var employee = await _dbContext.Employee.FirstOrDefaultAsync(emp => emp.Id == id);
+            if (employee == null)
+            {
+                throw new InvalidOperationException($"Employee with ID {id} not found.");
+            }
+            return employee;
         }
 
         public async Task<List<Employee>> GetEmployeeListByIdSuperiorAsync(long id)

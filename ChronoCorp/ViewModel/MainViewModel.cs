@@ -175,10 +175,11 @@ namespace ChronoCorp.ViewModel
         [RelayCommand]
         private void OpenScheduleManagement()
         {
-            NavigateTo(new ScheduleManagementView
-            {
-                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
-            });
+            var vm = new ScheduleManagementViewModel(_ceduleQuartService, _employeeService);
+            var view = new ScheduleManagementView { DataContext = vm };
+            NavigateTo(view);
+            // Charge la liste des employés dès l'ouverture de la fenêtre
+            _ = vm.LoadEmployees();
         }
         
         [RelayCommand]
