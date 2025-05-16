@@ -11,5 +11,8 @@ namespace ChronoCorp.Interface
     {
         Task<List<CeduleQuart>> GetAllCeduleQuartAsync();
         Task<List<CeduleQuart>> GetQuartListByEmployeeId(long id);
+
+        //Sert à créer l'horaire
+        Task AddCeduleQuartAsync(CeduleQuart quart);
     }
 }

@@ -1,5 +1,7 @@
-﻿using ChronoCorp.Interface;
+﻿using ChronoCorp.Data;
+using ChronoCorp.Interface;
 using ChronoCorp.Model;
+using ChronoCorp.Service;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -26,10 +28,10 @@ namespace ChronoCorp.ViewModel
         private ObservableCollection<MenuItemModel> subMenuItems;
 
         [ObservableProperty]
-        private ObservableCollection<Messagerie> messagesPaie = new(); 
+        private ObservableCollection<Messagerie> messagesPaie = new();
 
         [ObservableProperty]
-        private ObservableCollection<Messagerie> messagesDemandesConge = new(); 
+        private ObservableCollection<Messagerie> messagesDemandesConge = new();
 
         [ObservableProperty]
         private ObservableCollection<Messagerie> messagesApprobationConge = new();
@@ -71,7 +73,7 @@ namespace ChronoCorp.ViewModel
                 SectionsForEmployeesVisibility = Visibility.Collapsed;
             }
             else
-            { 
+            {
                 _ = LoadLeaveApprobationMessages(employee);
                 _ = LoadPaySlipsMessages(employee);
                 SectionForManagerVisibility = Visibility.Collapsed;
@@ -131,11 +133,18 @@ namespace ChronoCorp.ViewModel
             });
         }
         [RelayCommand]
+
         private void NavigateToScheduleManagement()
         {
+            // Use a factory or service to create the EmployeeService instance
+            var employeeService = new EmployeeService(new ApplicationDbContext());
+
             _navigationService.NavigateTo(new ScheduleManagementView
             {
-                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
+                DataContext = new ScheduleManagementViewModel(
+                    _ceduleQuartService,
+                    employeeService
+                )
             });
         }
         [RelayCommand]

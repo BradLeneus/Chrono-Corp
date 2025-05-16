@@ -48,7 +48,7 @@ namespace ChronoCorp.ViewModel
             LoadMenuItems();
             CurrentView = new HomeView
             {
-                DataContext = new 
+                DataContext = new
                 HomeViewModel(CurrentEmployee, _role, this, _messagerieService, _fichePaieService, _demandeCongeService, _ceduleQuartService)
             };
         }
@@ -77,7 +77,8 @@ namespace ChronoCorp.ViewModel
                     MenuItems.Add(new MenuItemModel { Title = "Voir la liste des employés", Command = OpenEmployeeListCommand });
                     MenuItems.Add(new MenuItemModel { Title = "Ajouter un employé", Command = OpenAddEmployeeCommand });
                 }
-            } else
+            }
+            else
             {
                 MenuItems.Add(new MenuItemModel { Title = "Voir mon horaire", Command = OpenScheduleCommand });
                 MenuItems.Add(new MenuItemModel { Title = "Pointer ma présence", Command = OpenClockingCommand });
@@ -121,7 +122,7 @@ namespace ChronoCorp.ViewModel
                 DataContext = new ClockingManagementViewModel(_ceduleQuartService)
             });
         }
-        
+
         [RelayCommand]
         private void OpenClocking()
         {
@@ -130,7 +131,7 @@ namespace ChronoCorp.ViewModel
                 DataContext = new ClockingViewModel(CurrentEmployee, _ceduleQuartService)
             });
         }
-        
+
         [RelayCommand]
         private void OpenEmployeeList()
         {
@@ -165,8 +166,8 @@ namespace ChronoCorp.ViewModel
                 DataContext = new MyEmployeesViewModel(CurrentEmployee, _employeeService)
             });
         }
-        
-        
+
+
         [RelayCommand]
         private void OpenMyLeaveRequest()
         {
@@ -175,8 +176,8 @@ namespace ChronoCorp.ViewModel
                 DataContext = new MyLeaveRequestViewModel(CurrentEmployee, _demandeCongeService)
             });
         }
-        
-        
+
+
         [RelayCommand]
         private void OpenPaySlips()
         {
@@ -185,16 +186,17 @@ namespace ChronoCorp.ViewModel
                 DataContext = new PaySlipsViewModel(CurrentEmployee, _fichePaieService)
             });
         }
-        
+
         [RelayCommand]
         private void OpenScheduleManagement()
         {
-            NavigateTo(new ScheduleManagementView
-            {
-                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
-            });
+            var vm = new ScheduleManagementViewModel(_ceduleQuartService, _employeeService);
+            var view = new ScheduleManagementView { DataContext = vm };
+            NavigateTo(view);
+            // Charge la liste des employés dès l'ouverture de la fenêtre
+            _ = vm.LoadEmployees();
         }
-        
+
         [RelayCommand]
         private void OpenSchedule()
         {

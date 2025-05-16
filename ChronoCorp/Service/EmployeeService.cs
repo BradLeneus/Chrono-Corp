@@ -9,9 +9,9 @@ namespace ChronoCorp.Service
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public EmployeeService()
+        public EmployeeService(ApplicationDbContext dbContext)
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = dbContext;
         }
 
         public async Task<List<Employee>> GetAllEmployeesAsync()
