@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ChronoCorp.View.ClockingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChronoCorp.View"
+             xmlns:viewmodel="clr-namespace:ChronoCorp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border Style="{StaticResource ViewBorderStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Pointage</TextBlock>
+            <StackPanel Grid.Row="1">
+                <DataGrid AutoGenerateColumns="False"
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          ItemsSource="{Binding ShiftToClock}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure début" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure fin" Width="*" IsReadOnly="True" Binding="{Binding HeureFin}"/>
+                        <DataGridTextColumn Header="Entrée" Width="*"/>
+                        <DataGridTextColumn Header="Sortie" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
