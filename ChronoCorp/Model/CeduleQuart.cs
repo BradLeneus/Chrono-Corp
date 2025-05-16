@@ -24,13 +24,5 @@ namespace ChronoCorp.Model
         public Employee Employee { get; set; }
         public Employee Gestionnaire { get; set; }
         public TypeQuart TypeDuQuart { get; set; }
-
-        public double NbHeures
-        {
-            get
-            {
-                return (HeureFin - HeureDebut).TotalHours;
-            }
-        }
     }
 }

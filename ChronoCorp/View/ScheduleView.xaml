@@ -25,12 +25,12 @@
                           GridLinesVisibility="None"
                           ItemsSource="{Binding MyShiftList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Jour" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:dddd}}"/>
-                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:dd/MM/yyyy}}"/>
-                        <DataGridTextColumn Header="Heure début" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:HH\\:mm}}"/>
-                        <DataGridTextColumn Header="Heure fin" Width="*" Binding="{Binding HeureFin, StringFormat={}{0:HH\\:mm}}"/>
-                        <DataGridCheckBoxColumn Header="Pause Payée?" Width="*" Binding="{Binding IsPausePayee}"/>
-                        <DataGridTextColumn Header="Nbr heures" Width="*" Binding="{Binding NbHeures, StringFormat={}{0:N2}}"/>
+                        <DataGridTextColumn Header="Jour" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure début" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Heure fin" Width="*" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Pause Payée?" Width="*" Binding="{Binding IsPausePayee}"/>
+                        <DataGridTextColumn Header="Nbr heures" Width="*" Binding="{Binding HeureDebut}"/>
                         <DataGridTextColumn Header="Type du quart" Width="*" Binding="{Binding TypeQuart}"/>
                     </DataGrid.Columns>
                 </DataGrid>

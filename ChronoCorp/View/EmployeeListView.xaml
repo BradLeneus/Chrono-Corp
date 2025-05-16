@@ -6,22 +6,28 @@
              xmlns:local="clr-namespace:ChronoCorp.View"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
     <Border Style="{StaticResource ViewBorderStyle}">
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.9*"/>
             </Grid.RowDefinitions>
+            
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Liste des employés</TextBlock>
+            
             <StackPanel Grid.Row="1">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
                     <TextBox Style="{StaticResource FormInputStyle}" Width="200"/>
                     <Button Style="{StaticResource DarkBlueButton2Style}">Rechercher</Button>
                     <Button Style="{StaticResource DarkBlueButton2Style}">Ajouter un employé</Button>
                 </StackPanel>
+
                 <DataGrid AutoGenerateColumns="False"
                       ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
                       CellStyle="{StaticResource DataGridCellStyle}"
@@ -29,12 +35,15 @@
                       RowStyle="{StaticResource DataGridRowStyle}"
                       GridLinesVisibility="None"
                       IsReadOnly="True"
-                      ItemsSource="{Binding Employees}">
+                      ItemsSource="{Binding Employees}"
+                      SelectedItem="{Binding Employee, Mode=TwoWay}"
+                      MouseDoubleClick="EmployeeDataGrid_MouseDoubleClick">
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Numéro d'employé" Width="*" IsReadOnly="True" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Prénom" Width="*" IsReadOnly="True" Binding="{Binding Prenom}"/>
                         <DataGridTextColumn Header="Nom" Width="*" IsReadOnly="True" Binding="{Binding Nom}"/>
-                        <DataGridTextColumn Header="Supérieur" Width="*" IsReadOnly="True" Binding="{Binding IdSuperieur}"/>
+                        <DataGridTextColumn Header="Supérieur" Width="*" IsReadOnly="True" Binding="{Binding Gestionnaire.NomComplet}"/>
                         <DataGridTextColumn Header="Poste" Width="*" IsReadOnly="True" Binding="{Binding Poste}"/>
                         <DataGridTextColumn Header="Action" Width="*" IsReadOnly="True"/>
                     </DataGrid.Columns>
