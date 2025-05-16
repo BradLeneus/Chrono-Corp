@@ -101,18 +101,12 @@ namespace ChronoCorp.ViewModel
         [RelayCommand]
         private void OpenAddEmployee()
         {
-            var vm = new AddEmployeeViewModel(_employeeService);
-            NavigateTo(new AddEmployeeView(vm));
+            NavigateTo(new AddEmployeeView
+            {
+                DataContext = new AddEmployeeViewModel(_employeeService)
+            });
         }
-
-        [RelayCommand]
-        public void OpenEditEmployee(Employee employee)
-        {
-            var vm = new EditEmployeeViewModel(_employeeService);
-            vm.LoadEmployee(employee);
-            NavigateTo(new EditEmployeeView(vm));
-        }
-
+        
         [RelayCommand]
         private void OpenClockingManagement()
         {
@@ -134,18 +128,10 @@ namespace ChronoCorp.ViewModel
         [RelayCommand]
         private void OpenEmployeeList()
         {
-            var listVm = new EmployeeListViewModel(new Employee
+            NavigateTo(new EmployeeListView
             {
-                Prenom = "",
-                Nom = "",
-                Courriel = "",
-                Telephone = "",
-                Departement = "",
-                Poste = ""
-            }, _employeeService);
-
-            var employeeListView = new EmployeeListView(listVm, this);
-            NavigateTo(employeeListView);
+                DataContext = new EmployeeListViewModel(CurrentEmployee, _employeeService)
+            });
         }
 
         [RelayCommand]

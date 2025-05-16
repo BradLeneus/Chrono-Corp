@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ChronoCorp.ViewModel;
+﻿using System.Windows.Controls;
 
 namespace ChronoCorp.View
 {
@@ -9,18 +7,9 @@ namespace ChronoCorp.View
     /// </summary>
     public partial class AddEmployeeView : UserControl
     {
-        private readonly AddEmployeeViewModel _viewModel;
-
-        public AddEmployeeView(AddEmployeeViewModel viewModel)
+        public AddEmployeeView()
         {
             InitializeComponent();
-            _viewModel = viewModel;
-            DataContext = _viewModel;
-        }
-
-        private async void OnSaveClick(object sender, RoutedEventArgs e)
-        {
-            await _viewModel.SaveAsync();
         }
     }
 }

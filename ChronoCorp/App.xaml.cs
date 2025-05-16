@@ -31,8 +31,6 @@ namespace ChronoCorp
 
             var loginWindow = _serviceProvider.GetRequiredService<LoginView>();
             loginWindow.Show();
-
-            var addEmployee = _serviceProvider.GetRequiredService<AddEmployeeView>();
         }
 
         private void ConfigureServices(IServiceCollection services, IConfigurationRoot configuration)
@@ -54,14 +52,10 @@ namespace ChronoCorp
 
             // ViewModels
             services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<AddEmployeeViewModel>();
-            services.AddSingleton<EditEmployeeViewModel>();
 
             // Views
             services.AddSingleton<LoginView>();
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<AddEmployeeView>();
-            services.AddSingleton<EditEmployeeView>();
         }
 
         private void OnExit(object sender, ExitEventArgs e)

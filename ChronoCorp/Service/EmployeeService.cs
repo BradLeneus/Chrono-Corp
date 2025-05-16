@@ -9,9 +9,9 @@ namespace ChronoCorp.Service
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public EmployeeService()
+        public EmployeeService(ApplicationDbContext dbContext)
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = dbContext;
         }
 
         public async Task<List<Employee>> GetAllEmployeesAsync()
@@ -32,18 +32,6 @@ namespace ChronoCorp.Service
         public async Task<List<Employee>> GetEmployeeListByIdSuperiorAsync(long id)
         {
             return await _dbContext.Employee.Where(emp => emp.IdSuperieur == id).ToListAsync();
-        }
-
-        public async Task AddNewEmployeeAsync(Employee employee)
-        {
-            _dbContext.Employee.Add(employee);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateEmployeeAsync(Employee employee)
-        {
-            _dbContext.Employee.Update(employee);
-            await _dbContext.SaveChangesAsync();
         }
     }
 }
