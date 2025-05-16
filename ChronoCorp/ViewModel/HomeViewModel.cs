@@ -1,5 +1,7 @@
-﻿using ChronoCorp.Interface;
+﻿using ChronoCorp.Data;
+using ChronoCorp.Interface;
 using ChronoCorp.Model;
+using ChronoCorp.Service;
 using ChronoCorp.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -131,11 +133,18 @@ namespace ChronoCorp.ViewModel
             });
         }
         [RelayCommand]
+     
         private void NavigateToScheduleManagement()
         {
+            // Use a factory or service to create the EmployeeService instance
+            var employeeService = new EmployeeService(new ApplicationDbContext());
+
             _navigationService.NavigateTo(new ScheduleManagementView
             {
-                DataContext = new ScheduleManagementViewModel(_ceduleQuartService)
+                DataContext = new ScheduleManagementViewModel(
+                    _ceduleQuartService,
+                    employeeService
+                )
             });
         }
         [RelayCommand]

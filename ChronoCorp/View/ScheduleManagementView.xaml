@@ -3,38 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ChronoCorp.View"
+             xmlns:local="clr-namespace:ChronoCorp.View" 
+             xmlns:viewmodel="clr-namespace:ChronoCorp.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:ScheduleManagementViewModel}"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Border Style="{StaticResource ViewBorderStyle}">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Gestion des horaires</TextBlock>
-            <StackPanel Grid.Row="1">
-                <DataGrid AutoGenerateColumns="False"
-                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                          CellStyle="{StaticResource DataGridCellStyle}"
-                          BorderBrush="{StaticResource LightBlueColor}"
-                          RowStyle="{StaticResource DataGridRowStyle}"
-                          GridLinesVisibility="None"
-                          ItemsSource="{Binding ShiftList}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Jour" Width="*" Binding="{Binding HeureDebut}"/>
-                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding HeureDebut}"/>
-                        <DataGridTextColumn Header="Heure début" Width="*" Binding="{Binding HeureDebut}"/>
-                        <DataGridTextColumn Header="Heure fin" Width="*" Binding="{Binding HeureFin}"/>
-                        <DataGridTextColumn Header="Pause Payée?" Width="*" Binding="{Binding IsPausePayee}"/>
-                        <DataGridTextColumn Header="Nbr d'heures" Width="*"/>
-                        <DataGridTextColumn Header="Type du quart" Width="*" Binding="{Binding TypeQuart}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+
+            <!-- Titre -->
+            <TextBlock Grid.Row="0" Style="{StaticResource CurrentViewTitleStyle}">Gestion des horaires</TextBlock>
+
+            <!-- Formulaire de création d'horaire -->
+            <GroupBox Grid.Row="1" Header="Créer un horaire" Margin="20">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <!-- Employé -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Employé :" Width="120" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Employees}" 
+                                  SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                                  DisplayMemberPath="Nom" 
+                                  Width="200"/>
+                    </StackPanel>
+                    <!-- Date et heure de début -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Début :" Width="120" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" Width="120"/>
+                        <TextBox Width="60"
+                                 Text="{Binding SelectedTime, StringFormat='hh\\:mm', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="Heure de début (HH:mm)"/>
+                    </StackPanel>
+                    <!-- Date et heure de fin -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Fin :" Width="120" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay}" Width="120"/>
+                        <TextBox Width="60"
+                                 Text="{Binding EndTime, StringFormat='hh\\:mm', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="Heure de fin (HH:mm)"/>
+                    </StackPanel>
+                    <!-- Type du quart -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Type du quart :" Width="120" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding TypeQuart, Mode=TwoWay}" Width="50" ToolTip="Type du quart (ID numérique)"/>
+                    </StackPanel>
+                    <!-- Pause payée -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Pause payée :" Width="120" VerticalAlignment="Center"/>
+                        <CheckBox IsChecked="{Binding IsPausePayee, Mode=TwoWay}" Content="Oui"/>
+                    </StackPanel>
+                    <!-- Nb d'heures (optionnel, pour info) -->
+                
+                    <!-- Bouton -->
+                    <Button Content="Créer Horaire"
+                            Command="{Binding CreateAndAssignShiftCommand}"
+                            Margin="0,10,0,0" Width="150" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Tableau des horaires -->
+            <DataGrid Grid.Row="2"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding ShiftList}"
+                      SelectedItem="{Binding SelectedShift, Mode=TwoWay}"
+                      Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Jour" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:dddd}}"/>
+                    <DataGridTextColumn Header="Date" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:dd/MM/yyyy}}"/>
+                    <DataGridTextColumn Header="Heure début" Width="*" Binding="{Binding HeureDebut, StringFormat={}{0:HH\\:mm}}"/>
+                    <DataGridTextColumn Header="Heure fin" Width="*" Binding="{Binding HeureFin, StringFormat={}{0:HH\\:mm}}"/>
+                    <DataGridCheckBoxColumn Header="Pause Payée?" Width="*" Binding="{Binding IsPausePayee}"/>
+                    <DataGridTextColumn Header="Nbr d'heures" Width="*" Binding="{Binding NbHeures}"/>
+                    <DataGridTextColumn Header="Type du quart" Width="*" Binding="{Binding TypeQuart}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Affichage du nombre d'heures calculé -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="20,10,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="Nombre d'heures saisi : " FontWeight="Bold"/>
+                <TextBlock Text="{Binding NbHeuresSaisi, StringFormat={}{0:N2}}"/>
             </StackPanel>
+
         </Grid>
     </Border>
 </UserControl>
+
+

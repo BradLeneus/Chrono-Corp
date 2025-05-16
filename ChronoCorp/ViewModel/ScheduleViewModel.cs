@@ -28,5 +28,16 @@ namespace ChronoCorp.ViewModel
             var shiftList = await _ceduleQuartService.GetQuartListByEmployeeId(employee.Id);
             MyShiftList = new ObservableCollection<CeduleQuart>(shiftList);
         }
+
+
+        //Implémenter ReadMyShift
+
+        public async Task ReadMyShift(Employee employee) { 
+        
+        
+        }
+        
+
+
     }
 }

@@ -27,5 +27,17 @@ namespace ChronoCorp.ViewModel
             var fichePaieList = await _fichePaieService.GetFichePaieListByEmployeeId(employee.Id);
             paySlipsList = new ObservableCollection<FichePaie>(fichePaieList);
         }
+
+
+        //Implémenter ReadMyPaySlips()
+           public async Task ReadMyPaySlips(Employee employee)
+        {
+
+        }
+
+
+       
+
+
     }
 }
