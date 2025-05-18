@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace ChronoCorp.ViewModel
 {
     public partial class MyEmployeesLeaveRequestViewModel : ObservableObject
@@ -67,5 +68,6 @@ namespace ChronoCorp.ViewModel
                 MessageBox.Show($"Erreur lors de la mise à jour de la demande : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

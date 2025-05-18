@@ -71,6 +71,7 @@
                             <Button Style="{StaticResource DarkBlueButtonStyle}" Content="Approuver" Command="{Binding ApproveRequestCommand}" CommandParameter="{Binding SelectedLeaveRequest}" Margin="5,0"/>
                             <Button Style="{StaticResource DarkBlueButtonStyle}" Content="Refuser" Command="{Binding RejectRequestCommand}" CommandParameter="{Binding SelectedLeaveRequest}" Margin="5,0"/>
                         </StackPanel>
+
                     </StackPanel>
                 </Border>
             </StackPanel>

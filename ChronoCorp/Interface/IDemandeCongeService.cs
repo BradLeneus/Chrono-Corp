@@ -11,8 +11,7 @@ namespace ChronoCorp.Interface
     public interface IDemandeCongeService
     {
         Task<List<DemandeConge>> GetDemandeCongeListByIdEmetteur(long id);
-        Task<List<DemandeConge>> GetDemandeCongeListByIdDestinataire(long id);
-        
+        Task<List<DemandeConge>> GetDemandeCongeListByIdDestinataire(long id);        
         
         Task AddDemandeCongeAsync(DemandeConge demande);
 
