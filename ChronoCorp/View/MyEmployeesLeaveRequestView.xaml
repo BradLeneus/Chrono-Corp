@@ -26,7 +26,8 @@
                           RowStyle="{StaticResource DataGridRowStyle}"
                           GridLinesVisibility="None"
                           IsReadOnly="True"
-                          ItemsSource="{Binding LeaveRequest}">
+                          ItemsSource="{Binding LeaveRequest}"
+                          SelectedItem="{Binding SelectedLeaveRequest, Mode=TwoWay}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Employé" Width="*" Binding="{Binding IdEmetteur}"/>
                         <DataGridTextColumn Header="Date début" Width="*" Binding="{Binding DateDebut}"/>
@@ -39,19 +40,22 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="20 0 0 0">
                 <Border Style="{StaticResource BackgroundFormStyle}">
                     <StackPanel>
-                        <TextBlock Style="{StaticResource CurrentViewTitleStyle}" HorizontalAlignment="Center">Demande de {employé}</TextBlock>
+                        <TextBlock Style="{StaticResource CurrentViewTitleStyle}" HorizontalAlignment="Center">
+                            Demande  
+                            <Run Text="{Binding SelectedLeaveRequest.Employee.NomComplet}"/>
+                        </TextBlock>
                         <StackPanel Style="{StaticResource StackPanelFormStyle}">
                             <Label Style="{StaticResource LabelStyle}">Type de la demande</Label>
-                            <TextBox Style="{StaticResource FormInputStyle}"/>
+                            <TextBox Style="{StaticResource FormInputStyle}" Text="{Binding SelectedLeaveRequest.TypeQuart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
                                 <Label Style="{StaticResource LabelStyle}">Du</Label>
-                                <DatePicker x:Name="dateDebut" Width="auto"/>
+                                <DatePicker x:Name="dateDebut" Width="auto" SelectedDate="{Binding SelectedLeaveRequest.DateDebut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                             <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
                                 <Label Style="{StaticResource LabelStyle}">Au</Label>
-                                <DatePicker x:Name="dateFin" Width="auto"/>
+                                <DatePicker x:Name="dateFin" Width="auto" SelectedDate="{Binding SelectedLeaveRequest.DateFin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Style="{StaticResource StackPanelFormStyle}">
@@ -60,20 +64,14 @@
                                     AcceptsReturn="True"
                                     IsReadOnly="True"
                                     Width="auto"
-                                    Height="100"/>
+                                    Height="100"
+                                    Text="{Binding SelectedLeaveRequest.Commentaire}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton Content="Accepté" GroupName="Approbation" />
-                            <RadioButton Content="Refusé" GroupName="Approbation" />
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center" >
+                            <Button Style="{StaticResource DarkBlueButtonStyle}" Content="Approuver" Command="{Binding ApproveRequestCommand}" CommandParameter="{Binding SelectedLeaveRequest}" Margin="5,0"/>
+                            <Button Style="{StaticResource DarkBlueButtonStyle}" Content="Refuser" Command="{Binding RejectRequestCommand}" CommandParameter="{Binding SelectedLeaveRequest}" Margin="5,0"/>
                         </StackPanel>
-                        <StackPanel Style="{StaticResource StackPanelFormStyle}">
-                            <Label Style="{StaticResource LabelStyle}">Commentaire</Label>
-                            <TextBox Style="{StaticResource FormInputStyle}"
-                                    AcceptsReturn="True"
-                                    Width="auto"
-                                    Height="100"/>
-                        </StackPanel>
-                        <Button Style="{StaticResource DarkBlueButtonStyle}">Envoyer la réponse</Button>
+
                     </StackPanel>
                 </Border>
             </StackPanel>

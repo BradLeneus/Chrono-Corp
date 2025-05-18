@@ -29,5 +29,17 @@ namespace ChronoCorp.Service
             return await _dbContext.Demande_Conge.Where(dc => dc.IdEmetteur == id).ToListAsync();
 
         }
+        
+        public async Task AddDemandeCongeAsync(DemandeConge demande)
+        {
+            _dbContext.Demande_Conge.Add(demande);
+            await _dbContext.SaveChangesAsync();
+        }
+        
+        public async Task UpdateDemandeCongeAsync(DemandeConge demande)
+        {
+            _dbContext.Demande_Conge.Update(demande);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -9,18 +9,19 @@
     <Border Style="{StaticResource BackgroundFormStyle}">
         <StackPanel>
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}" HorizontalAlignment="Center">Nouvelle demande</TextBlock>
-            <StackPanel Style="{StaticResource StackPanelFormStyle}">
-                <Label Style="{StaticResource LabelStyle}">Type de la demande</Label>
-                <TextBox Style="{StaticResource FormInputStyle}"/>
+                    <!-- Type du quart -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">                    
+                <TextBlock Text="Type du quart :" Width="120" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding TypeQuart, Mode=TwoWay}" Width="50" ToolTip="Type du quart (ID numérique)"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
                     <Label Style="{StaticResource LabelStyle}">Du</Label>
-                    <DatePicker x:Name="dateDebut" Width="auto"/>
+                    <DatePicker x:Name="dateDebut" Width="auto" SelectedDate="{Binding DateDebut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Style="{StaticResource StackPanelFormStyle}" Width="auto">
                     <Label Style="{StaticResource LabelStyle}">Au</Label>
-                    <DatePicker x:Name="dateFin" Width="auto"/>
+                    <DatePicker x:Name="dateFin" Width="auto" SelectedDate="{Binding DateFin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Style="{StaticResource StackPanelFormStyle}">
@@ -28,10 +29,11 @@
                 <TextBox Style="{StaticResource FormInputStyle}"
                     AcceptsReturn="True"
                     Width="auto"
-                    Height="100"/>
+                    Height="100"
+                    Text="{Binding Commentaire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
             </StackPanel>
             <Button Style="{StaticResource DarkBlueButtonStyle}" Command="{Binding SendLeaveRequestCommand}">Envoyer</Button>
         </StackPanel>
     </Border>
-    
 </UserControl>

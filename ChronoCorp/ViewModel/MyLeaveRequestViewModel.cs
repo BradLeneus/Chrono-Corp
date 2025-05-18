@@ -26,7 +26,6 @@ namespace ChronoCorp.ViewModel
             _demandeCongeService = demandeCongeService;
             _ = LoadMyLeaveRequest(employee);
 
-
             CurrentLeaveView = new CheckLeaveStatusView
             {
                 DataContext = new CheckLeaveStatusViewModel(Employee)
@@ -44,7 +43,7 @@ namespace ChronoCorp.ViewModel
         {
             CurrentLeaveView = new NewLeaveView
             {
-                DataContext = new NewLeaveViewModel(Employee)
+                DataContext = new NewLeaveViewModel(Employee, _demandeCongeService) 
             };
         }
     }
