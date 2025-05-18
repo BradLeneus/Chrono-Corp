@@ -17,6 +17,9 @@
             <RowDefinition Height="150"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        <StackPanel>
+            <Image Source="/Images/logo_chronocorp.png" Margin="5 10 0 0"/>
+        </StackPanel>
         <ListBox ItemsSource="{Binding MenuItems}"
                  Grid.Column="0" Grid.Row="1"
                  Background="Transparent"
