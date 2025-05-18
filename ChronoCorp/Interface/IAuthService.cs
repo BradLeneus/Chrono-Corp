@@ -8,8 +8,7 @@ namespace ChronoCorp.Interface
 {
     public interface IAuthService
     {
-        Task<bool> AuthenticateAsync(string username, string password);
-        Task<long> GetEmployeeIdAsync(string username, string password);
-        Task<string> GetEmployeeRoleAsync(string username, string password);
+        Task<bool> AuthenticateAsync(int id, string password);
+        Task<string> GetEmployeeRoleAsync(int id, string password);
     }
 }
