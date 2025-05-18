@@ -56,6 +56,20 @@ namespace ChronoCorp.Service
 
                 _dbContext.Messagerie.Add(message);
                 await _dbContext.SaveChangesAsync();
+
+                var ceduleQuart = new CeduleQuart
+                {
+                    IdEmployee = demande.IdEmetteur,
+                    IdCreateur = demande.IdDestinataire,
+                    TypeQuart = demande.TypeQuart,
+                    HeureDebut = new DateTime(demande.DateDebut.Year, demande.DateDebut.Month, demande.DateDebut.Day, 7, 0, 0),
+                    HeureFin = new DateTime(demande.DateDebut.Year, demande.DateDebut.Month, demande.DateDebut.Day, 15, 0, 0),
+                    IsPausePayee = false,
+                    IsPointageApprouve = false
+                };
+
+                _dbContext.Cedule_Quart.Add(ceduleQuart);
+                await _dbContext.SaveChangesAsync();
             }
         }
     }
