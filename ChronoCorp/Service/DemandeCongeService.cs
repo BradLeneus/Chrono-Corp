@@ -1,4 +1,4 @@
-﻿using ChronoCorp.Data;
+using ChronoCorp.Data;
 using ChronoCorp.Interface;
 using ChronoCorp.Model;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +13,12 @@ namespace ChronoCorp.Service
     public class DemandeCongeService : IDemandeCongeService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMessagerieService _messagerieService;
 
-        public DemandeCongeService(ApplicationDbContext dbContext)
+        public DemandeCongeService(ApplicationDbContext dbContext, IMessagerieService messagerieService)
         {
             _dbContext = dbContext;
+            _messagerieService = messagerieService;
         }
 
         public async Task<List<DemandeConge>> GetDemandeCongeListByIdDestinataire(long id)
@@ -40,6 +42,35 @@ namespace ChronoCorp.Service
         {
             _dbContext.Demande_Conge.Update(demande);
             await _dbContext.SaveChangesAsync();
+
+            if (demande.EstApprouve == true)
+            {
+                var message = new Messagerie
+                {
+                    IdEmetteur = demande.IdDestinataire,
+                    IdDestinataire = demande.IdEmetteur,
+                    TypeMessage = "approbation_conge",
+                    Contenu = $"Votre demande de congé du {demande.DateDebut.ToShortDateString()} au {demande.DateFin.ToShortDateString()} a été approuvée.",
+                    Temps = DateTime.Now
+                };
+
+                _dbContext.Messagerie.Add(message);
+                await _dbContext.SaveChangesAsync();
+
+                var ceduleQuart = new CeduleQuart
+                {
+                    IdEmployee = demande.IdEmetteur,
+                    IdCreateur = demande.IdDestinataire,
+                    TypeQuart = demande.TypeQuart,
+                    HeureDebut = new DateTime(demande.DateDebut.Year, demande.DateDebut.Month, demande.DateDebut.Day, 7, 0, 0),
+                    HeureFin = new DateTime(demande.DateDebut.Year, demande.DateDebut.Month, demande.DateDebut.Day, 15, 0, 0),
+                    IsPausePayee = false,
+                    IsPointageApprouve = false
+                };
+
+                _dbContext.Cedule_Quart.Add(ceduleQuart);
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }
