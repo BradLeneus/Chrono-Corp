@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ChronoCorp.View.ClockingView"
+<UserControl x:Class="ChronoCorp.View.ClockingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,17 +14,25 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.8*"/>
             </Grid.RowDefinitions>
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Pointage</TextBlock>
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <Button Content="Pointage entrant" Command="{Binding SetHeureDebutNowCommand}" Width="120" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding NewHeureDebut, StringFormat='{}{0:G}'}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Button Content="Pointage sortant" Command="{Binding SetHeureFinNowCommand}" Width="120" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding NewHeureFin, StringFormat='{}{0:G}'}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Button Content="Ajouter" Command="{Binding AddCedulePointageCommand}" Width="75"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
                 <DataGrid AutoGenerateColumns="False"
                           ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
                           CellStyle="{StaticResource DataGridCellStyle}"
                           BorderBrush="{StaticResource LightBlueColor}"
                           RowStyle="{StaticResource DataGridRowStyle}"
                           GridLinesVisibility="None"
-                          ItemsSource="{Binding ShiftToClock}">
+                          ItemsSource="{Binding ShiftToClockList}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
                         <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
