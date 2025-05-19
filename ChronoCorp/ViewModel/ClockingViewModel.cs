@@ -22,22 +22,19 @@ namespace ChronoCorp.ViewModel
         private ObservableCollection<CeduleQuart> shiftToClockList = new();
 
         [ObservableProperty]
-        private DateTime? newHeureDebut;
+        private CeduleQuart selectedCeduleQuart;
 
-        [ObservableProperty]
-        private DateTime? newHeureFin;
-
-        public IRelayCommand AddCedulePointageCommand { get; }
-        public IRelayCommand SetHeureDebutNowCommand { get; }
-        public IRelayCommand SetHeureFinNowCommand { get; }
+        public IRelayCommand SetHeureEntreeNowCommand { get; }
+        public IRelayCommand SetHeureDepartNowCommand { get; }
+        public IRelayCommand SaveCedulePointageCommand { get; }
 
         public ClockingViewModel(Employee employee, ICeduleQuartService ceduleQuartService)
         {
             _ceduleQuartService = ceduleQuartService;
             Employee = employee;
-            AddCedulePointageCommand = new RelayCommand(async () => await AddCedulePointageAsync());
-            SetHeureDebutNowCommand = new RelayCommand(SetHeureDebutNow);
-            SetHeureFinNowCommand = new RelayCommand(SetHeureFinNow);
+            SetHeureEntreeNowCommand = new RelayCommand(SetHeureEntreeNow);
+            SetHeureDepartNowCommand = new RelayCommand(SetHeureDepartNow);
+            SaveCedulePointageCommand = new RelayCommand(async () => await SaveCedulePointageAsync());
             _ = LoadMyShiftToClock(employee);
         }
 
@@ -47,53 +44,38 @@ namespace ChronoCorp.ViewModel
             ShiftToClockList = new ObservableCollection<CeduleQuart>(shiftList);
         }
 
-        private async Task AddCedulePointageAsync()
+        private void SetHeureEntreeNow()
         {
-            if (NewHeureDebut == null || NewHeureFin == null)
+            if (SelectedCeduleQuart != null)
             {
-                return;
+                SelectedCeduleQuart.HeureEntree = DateTime.Now;
+                OnPropertyChanged(nameof(SelectedCeduleQuart));
             }
+        }
 
-            if (NewHeureFin <= NewHeureDebut)
+        private void SetHeureDepartNow()
+        {
+            if (SelectedCeduleQuart != null)
             {
-                
-                return;
+                SelectedCeduleQuart.HeureDepart = DateTime.Now;
+                OnPropertyChanged(nameof(SelectedCeduleQuart));
             }
+        }
 
-            var newCedule = new CeduleQuart
-            {
-                IdEmployee = Employee.Id,
-                IdCreateur = Employee.Id, 
-                TypeQuart = 1, 
-                IsPausePayee = false,
-                HeureDebut = NewHeureDebut.Value,
-                HeureFin = NewHeureFin.Value,
-                IsPointageApprouve = false
-            };
+        private async Task SaveCedulePointageAsync()
+        {
+            if (SelectedCeduleQuart == null)
+                return;
 
             try
             {
-                await _ceduleQuartService.AddCeduleQuartAsync(newCedule);
+                await _ceduleQuartService.UpdateCeduleQuartAsync(SelectedCeduleQuart);
                 await LoadMyShiftToClock(Employee);
-
-               
-                NewHeureDebut = null;
-                NewHeureFin = null;
             }
             catch (Exception ex)
             {
-                
+                // Optionally handle exception, e.g., log or notify user
             }
-        }
-
-        private void SetHeureDebutNow()
-        {
-            NewHeureDebut = DateTime.Now;
-        }
-
-        private void SetHeureFinNow()
-        {
-            NewHeureFin = DateTime.Now;
         }
     }
 }
