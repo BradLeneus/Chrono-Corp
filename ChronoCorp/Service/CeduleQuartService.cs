@@ -1,4 +1,4 @@
-﻿using ChronoCorp.Data;
+using ChronoCorp.Data;
 using ChronoCorp.Interface;
 using ChronoCorp.Model;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +43,22 @@ namespace ChronoCorp.Service
                 throw new ArgumentException("Le TypeQuart spécifié n'existe pas dans la table Type_Quart.");
 
             await _dbContext.Cedule_Quart.AddAsync(quart);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateCeduleQuartAsync(CeduleQuart quart)
+        {
+            var existing = await _dbContext.Cedule_Quart.FindAsync(quart.Id);
+            if (existing == null)
+            {
+                throw new ArgumentException("Le CeduleQuart spécifié n'existe pas.");
+            }
+
+            existing.HeureEntree = quart.HeureEntree;
+            existing.HeureDepart = quart.HeureDepart;
+            existing.IsPointageApprouve = quart.IsPointageApprouve;
+
+            _dbContext.Cedule_Quart.Update(existing);
             await _dbContext.SaveChangesAsync();
         }
     }

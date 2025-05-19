@@ -15,17 +15,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.7*"/>
             </Grid.RowDefinitions>
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Pointage</TextBlock>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" >
-                <Button Content="Pointage entrant" Command="{Binding SetHeureDebutNowCommand}" Width="120" Margin="0,0,5,0"/>
-                <TextBlock Text="{Binding NewHeureDebut, StringFormat='{}{0:G}'}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <Button Content="Pointage sortant" Command="{Binding SetHeureFinNowCommand}" Width="120" Margin="0,0,5,0"/>
-                <TextBlock Text="{Binding NewHeureFin, StringFormat='{}{0:G}'}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <Button Content="Ajouter" Command="{Binding AddCedulePointageCommand}" Width="75"/>
+            <ComboBox Grid.Row="1" ItemsSource="{Binding ShiftToClockList}" SelectedItem="{Binding SelectedCeduleQuart}" DisplayMemberPath="HeureDebut" Margin="5" />
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <Button Content="Pointage entrant" Command="{Binding SetHeureEntreeNowCommand}" Width="120" Margin="0,0,5,0"/>
+                <Button Content="Pointage sortant" Command="{Binding SetHeureDepartNowCommand}" Width="120" Margin="0,0,5,0"/>
+                <Button Content="Enregistrer" Command="{Binding SaveCedulePointageCommand}" Width="75"/>
             </StackPanel>
-            <StackPanel Grid.Row="2">
+            <StackPanel Grid.Row="3">
                 <DataGrid AutoGenerateColumns="False"
                           ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
                           CellStyle="{StaticResource DataGridCellStyle}"
@@ -38,8 +38,8 @@
                         <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
                         <DataGridTextColumn Header="Heure début" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
                         <DataGridTextColumn Header="Heure fin" Width="*" IsReadOnly="True" Binding="{Binding HeureFin}"/>
-                        <DataGridTextColumn Header="Entrée" Width="*"/>
-                        <DataGridTextColumn Header="Sortie" Width="*"/>
+                        <DataGridTextColumn Header="Entrée" Width="*" Binding="{Binding HeureEntree, StringFormat='{}{0:G}'}"/>
+                        <DataGridTextColumn Header="Sortie" Width="*" Binding="{Binding HeureDepart, StringFormat='{}{0:G}'}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

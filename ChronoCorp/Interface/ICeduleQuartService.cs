@@ -1,4 +1,4 @@
-﻿using ChronoCorp.Model;
+using ChronoCorp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +14,6 @@ namespace ChronoCorp.Interface
 
         //Sert à créer l'horaire
         Task AddCeduleQuartAsync(CeduleQuart quart);
+        Task UpdateCeduleQuartAsync(CeduleQuart quart);
     }
 }
