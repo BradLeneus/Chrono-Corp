@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ChronoCorp.View.ClockingManagementView"
+<UserControl x:Class="ChronoCorp.View.ClockingManagementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -30,7 +30,8 @@
                           BorderBrush="{StaticResource LightBlueColor}"
                           RowStyle="{StaticResource DataGridRowStyle}"
                           GridLinesVisibility="None"
-                          ItemsSource="{Binding ShiftClockToApproveList}">
+                          ItemsSource="{Binding ShiftClockToApproveList}"
+                          SelectedItem="{Binding SelectedCeduleQuart}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Employé" Width="*" IsReadOnly="True" Binding="{Binding IdEmployee}"/>
                         <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
@@ -42,6 +43,9 @@
                         <DataGridTextColumn Header="Approbation" Width="*" Binding="{Binding IsPointageApprouve}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Approuver Pointage" Command="{Binding ApprovePointageCommand}" Width="150" />
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>
