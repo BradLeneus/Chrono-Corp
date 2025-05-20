@@ -1,36 +1,52 @@
-﻿using ChronoCorp.Interface;
-using ChronoCorp.Model;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChronoCorp.ViewModel
-{
-    public partial class ClockingManagementViewModel : ObservableObject
-    {
-        private readonly ICeduleQuartService _ceduleQuartService;
-
-        [ObservableProperty]
-        private Employee employee;
-
-        [ObservableProperty]
-        private ObservableCollection<CeduleQuart> shiftClockToApproveList = new();
-
-        public ClockingManagementViewModel(ICeduleQuartService ceduleQuartService)
-        {
-            _ceduleQuartService = ceduleQuartService;
-            _ = LoadShiftAndClockingToApprove();
-        }
-
-        // ajouter filtre date?
-        public async Task LoadShiftAndClockingToApprove()
-        {
-            var shiftList = await _ceduleQuartService.GetAllCeduleQuartAsync();
-            ShiftClockToApproveList = new ObservableCollection<CeduleQuart>(shiftList);
-        }
-    }
-}
+<UserControl x:Class="ChronoCorp.View.ClockingManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChronoCorp.View"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border Style="{StaticResource ViewBorderStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Gestion des pointages et de la paie</TextBlock>
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
+                    <TextBox Style="{StaticResource FormInputStyle}" Width="200"/>
+                    <Button Style="{StaticResource DarkBlueButton2Style}">Filtrer</Button>
+                    <DatePicker x:Name="debutPeriode" Width="120"/>
+                    <DatePicker x:Name="finPeriode" Width="120"/>
+                    <Button Style="{StaticResource DarkBlueButton2Style}">Appliquer</Button>
+                </StackPanel>
+                <DataGrid AutoGenerateColumns="False"
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          BorderBrush="{StaticResource LightBlueColor}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          GridLinesVisibility="None"
+                          ItemsSource="{Binding ShiftClockToApproveList}"
+                          SelectedItem="{Binding SelectedCeduleQuart}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employé" Width="*" IsReadOnly="True" Binding="{Binding IdEmployee}"/>
+                        <DataGridTextColumn Header="Jour" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Quart début" Width="*" IsReadOnly="True" Binding="{Binding HeureDebut}"/>
+                        <DataGridTextColumn Header="Quart fin" Width="*" IsReadOnly="True" Binding="{Binding HeureFin}"/>
+                        <DataGridTextColumn Header="Pointage entrée" Width="*" Binding="{Binding HeureEntree}"/>
+                        <DataGridTextColumn Header="Pointage fin" Width="*" Binding="{Binding HeureDepart}"/>
+                        <DataGridTextColumn Header="Approbation" Width="*" Binding="{Binding IsPointageApprouve}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Approuver Pointage" Command="{Binding ApprovePointageCommand}" Width="150" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
