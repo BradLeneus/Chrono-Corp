@@ -102,7 +102,7 @@ namespace ChronoCorp.ViewModel
 
 
 
-        // Commandes  pour les méthoses
+        // Commandes  pour les méthodes
         public IRelayCommand CreateAndAssignShiftCommand => new RelayCommand(async () =>
         {
             await CreateAndAssignShift(SelectedEmployee, StartDate, EndDate, TypeQuart, IsPausePayee);
