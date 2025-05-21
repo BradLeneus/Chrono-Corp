@@ -14,11 +14,11 @@ https://github.com/user-attachments/assets/fb63c7b3-9afc-4758-b801-6a6e33780448
 
 
 ## Démo gestionnaire
-https://github.com/user-attachments/assets/c5ff90ee-f1c7-44ee-be3e-009293d2be81
+https://github.com/user-attachments/assets/18bb221b-13a2-4d5c-a571-386128dab260
 
 
 ## Démo ressources humaines
-https://github.com/user-attachments/assets/961bc6a2-08ee-4933-b985-e6d87b13d619
+https://github.com/user-attachments/assets/cb075d8c-35f8-4474-b607-dd5bfc66519f
 
 
 ## Étapes de déploiement
