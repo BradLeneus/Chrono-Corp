@@ -8,6 +8,19 @@ ChronoCorp est une application moderne et intuitive pour les entreprises qui off
 -	Backend: Développement C# à l'aide de MVVM Toolkit
 -	Persistance : Implémentation de EntityFrameworkCore, EntityFrameworkCore.Design, EntityFrameworkCore.Relational, Pomelo.EntityFrameworkCored.MySql, MySql.Data (BD MySql sur serveur local)
 
+
+## Démo employée
+https://github.com/user-attachments/assets/fb63c7b3-9afc-4758-b801-6a6e33780448
+
+
+## Démo gestionnaire
+https://github.com/user-attachments/assets/c5ff90ee-f1c7-44ee-be3e-009293d2be81
+
+
+## Démo ressources humaines
+https://github.com/user-attachments/assets/961bc6a2-08ee-4933-b985-e6d87b13d619
+
+
 ## Étapes de déploiement
 - Créer une bd "chronocorp" dans Heidi
 - À partir des fichiers, double-cliquez sur ChronoCorp.sln
