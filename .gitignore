@@ -1,0 +1,74 @@
+# Compiled binaries
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# VS
+.vs/
+
+# Rider / JetBrains
+.idea/
+
+# Build results
+*.dll
+*.exe
+*.app
+*.log
+*.pdb
+*.cache
+*.mdb
+
+# Publish outputs
+publish/
+out/
+artifacts/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+
+# .NET Core generated files
+*.deps.json
+*.runtimeconfig.json
+
+# Auto-generated files
+Generated\
+
+# Local database files
+*.mdf
+*.ldf
+
+# Others
+_ReSharper*/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Ignore JetBrains Rider + VS for Mac files
+*.DotSettings.user
+*.DotSettings
+
+# Avoid ignoring source code
+!*.cs
+!*.xaml
+!*.csproj
+!*.sln
