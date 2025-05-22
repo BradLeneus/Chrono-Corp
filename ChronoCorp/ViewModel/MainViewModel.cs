@@ -119,9 +119,10 @@ namespace ChronoCorp.ViewModel
         {
             NavigateTo(new ClockingManagementView
             {
-                DataContext = new ClockingManagementViewModel(_ceduleQuartService)
+                DataContext = new ClockingManagementViewModel(_ceduleQuartService, _fichePaieService)
             });
         }
+
 
         [RelayCommand]
         private void OpenClocking()
@@ -193,7 +194,6 @@ namespace ChronoCorp.ViewModel
             var vm = new ScheduleManagementViewModel(_ceduleQuartService, _employeeService);
             var view = new ScheduleManagementView { DataContext = vm };
             NavigateTo(view);
-            // Charge la liste des employés dès l'ouverture de la fenêtre
             _ = vm.LoadEmployees();
         }
 

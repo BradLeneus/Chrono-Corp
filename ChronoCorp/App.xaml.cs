@@ -5,13 +5,11 @@ using ChronoCorp.View;
 using ChronoCorp.ViewModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace ChronoCorp
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private IServiceProvider _serviceProvider;
@@ -53,6 +51,11 @@ namespace ChronoCorp
             services.AddSingleton<IAuthService, AuthService>();
 
             // ViewModels
+            services.AddSingleton<ClockingManagementViewModel>();
+
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<HomeViewModel>();
+
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<AddEmployeeViewModel>();
             services.AddSingleton<EditEmployeeViewModel>();
@@ -62,6 +65,7 @@ namespace ChronoCorp
             services.AddSingleton<MainWindow>();
             services.AddSingleton<AddEmployeeView>();
             services.AddSingleton<EditEmployeeView>();
+            services.AddSingleton<ClockingManagementView>();
         }
 
         private void OnExit(object sender, ExitEventArgs e)
@@ -72,5 +76,4 @@ namespace ChronoCorp
             }
         }
     }
-
 }

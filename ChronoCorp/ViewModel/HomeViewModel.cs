@@ -152,9 +152,10 @@ namespace ChronoCorp.ViewModel
         {
             _navigationService.NavigateTo(new ClockingView
             {
-                DataContext = new ClockingManagementViewModel(_ceduleQuartService)
+                DataContext = new ClockingManagementViewModel(_ceduleQuartService, _fichePaieService)
             });
         }
+
         [RelayCommand]
         private void NavigateToSchedule()
         {

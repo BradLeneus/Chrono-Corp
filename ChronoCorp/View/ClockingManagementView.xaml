@@ -15,15 +15,20 @@
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.9*"/>
             </Grid.RowDefinitions>
+
             <TextBlock Style="{StaticResource CurrentViewTitleStyle}">Gestion des pointages et de la paie</TextBlock>
+
             <StackPanel Grid.Row="1">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
                     <TextBox Style="{StaticResource FormInputStyle}" Width="200"/>
                     <Button Style="{StaticResource DarkBlueButton2Style}">Filtrer</Button>
-                    <DatePicker x:Name="debutPeriode" Width="120"/>
-                    <DatePicker x:Name="finPeriode" Width="120"/>
-                    <Button Style="{StaticResource DarkBlueButton2Style}">Appliquer</Button>
+                    <DatePicker x:Name="debutPeriode" Width="120" SelectedDate="{Binding DebutPeriode, Mode=TwoWay}"/>
+                    <DatePicker x:Name="finPeriode" Width="120" SelectedDate="{Binding FinPeriode, Mode=TwoWay}"/>
+                    <Button Style="{StaticResource DarkBlueButton2Style}" 
+                            Content="Appliquer" 
+                            Command="{Binding AppliquerCommand}"/>
                 </StackPanel>
+
                 <DataGrid AutoGenerateColumns="False"
                           ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
                           CellStyle="{StaticResource DataGridCellStyle}"
@@ -43,6 +48,7 @@
                         <DataGridTextColumn Header="Approbation" Width="*" Binding="{Binding IsPointageApprouve}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
                     <Button Content="Approuver Pointage" Command="{Binding ApprovePointageCommand}" Width="150" />
                 </StackPanel>
